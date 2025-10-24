@@ -5,7 +5,7 @@ import type { LocaleOptions } from '@/lib/opendocs/types/i18n'
 import type { AbstractIntlMessages } from 'next-intl'
 
 import { locales } from '@/config/i18n'
-import { routing } from '@/navigation'
+import { routing } from '@/lib/opendocs/navigation'
 
 export default getRequestConfig(async ({ requestLocale }) => {
   let locale = await requestLocale

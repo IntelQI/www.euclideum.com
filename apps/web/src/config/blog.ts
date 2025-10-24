@@ -25,7 +25,6 @@ export const blogConfig: BlogConfig = {
 
       bio: {
         en: 'Software Engineer | Writer | Designer',
-        pt: 'Engenheiro de Software | Escritor | Designer',
       },
 
       social: {

@@ -16,7 +16,6 @@ export const docsConfig: DocsConfig = {
 
       title: {
         en: 'Documentation',
-        pt: 'Documentação',
       },
     },
   ],
@@ -25,7 +24,6 @@ export const docsConfig: DocsConfig = {
     {
       title: {
         en: 'Getting Started',
-        pt: 'Começando',
       },
 
       items: [
@@ -34,7 +32,6 @@ export const docsConfig: DocsConfig = {
 
           title: {
             en: 'Introduction',
-            pt: 'Introdução',
           },
 
           items: [],
@@ -45,7 +42,6 @@ export const docsConfig: DocsConfig = {
 
           title: {
             en: 'Adding new docs',
-            pt: 'Adicionando novos documentos',
           },
 
           items: [],
@@ -56,7 +52,6 @@ export const docsConfig: DocsConfig = {
 
           title: {
             en: 'Customizing',
-            pt: 'Personalizando',
           },
 
           items: [],
@@ -69,7 +64,6 @@ export const docsConfig: DocsConfig = {
 
           label: {
             en: 'New',
-            pt: 'Novo',
           },
 
           items: [
@@ -78,12 +72,10 @@ export const docsConfig: DocsConfig = {
 
               title: {
                 en: 'Frontmatter',
-                pt: 'Cabeçalho de metadados',
               },
 
               label: {
                 en: 'New',
-                pt: 'Novo',
               },
 
               items: [],
@@ -94,12 +86,10 @@ export const docsConfig: DocsConfig = {
 
               title: {
                 en: 'Code',
-                pt: 'Código',
               },
 
               label: {
                 en: 'New',
-                pt: 'Novo',
               },
 
               items: [],
@@ -110,12 +100,10 @@ export const docsConfig: DocsConfig = {
 
               title: {
                 en: 'Components',
-                pt: 'Componentes',
               },
 
               label: {
                 en: 'New',
-                pt: 'Novo',
               },
 
               items: [],
@@ -128,7 +116,6 @@ export const docsConfig: DocsConfig = {
 
           title: {
             en: 'Changelog',
-            pt: 'Histórico de alterações',
           },
 
           items: [],
