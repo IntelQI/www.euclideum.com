@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils";
 
 export const h5 = ({
   className,
@@ -6,9 +6,9 @@ export const h5 = ({
 }: React.HTMLAttributes<HTMLHeadingElement>) => (
   <h5
     className={cn(
-      'mt-8 scroll-m-20 text-lg font-semibold tracking-tight',
-      className
+      "mt-8 scroll-m-20 text-lg font-semibold tracking-tight",
+      className,
     )}
     {...props}
   />
-)
+);

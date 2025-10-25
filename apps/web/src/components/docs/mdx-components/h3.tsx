@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils";
 
 export const h3 = ({
   className,
@@ -6,9 +6,9 @@ export const h3 = ({
 }: React.HTMLAttributes<HTMLHeadingElement>) => (
   <h3
     className={cn(
-      'font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight',
-      className
+      "font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
+      className,
     )}
     {...props}
   />
-)
+);

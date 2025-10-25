@@ -1,13 +1,5 @@
-import { createNavigation } from 'next-intl/navigation'
-import { defineRouting } from 'next-intl/routing'
+// Re-export standard Next.js navigation
+export { redirect, usePathname, useRouter } from "next/navigation";
 
-import { locales, defaultLocale } from '@/config/i18n'
-
-export const routing = defineRouting({
-  locales,
-  defaultLocale,
-  localePrefix: 'as-needed',
-})
-
-export const { Link, redirect, usePathname, useRouter } =
-  createNavigation(routing)
+// For Link, we keep it as-is from Next.js
+export { default as Link } from "next/link";

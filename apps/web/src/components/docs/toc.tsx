@@ -1,27 +1,27 @@
-'use client'
+"use client";
 
-import { useMemo, useEffect, useState } from 'react'
-import { ExternalLink } from 'lucide-react'
+import { useMemo, useEffect, useState } from "react";
+import { ExternalLink } from "lucide-react";
 
-import { useMounted } from '@/lib/opendocs/hooks/use-mounted'
-import { TableOfContents } from '@/lib/opendocs/utils/toc'
-import { Separator } from '@/components/ui/separator'
-import { siteConfig } from '@/config/site'
-import { cn } from '@/lib/utils'
+import { useMounted } from "@/lib/opendocs/hooks/use-mounted";
+import { TableOfContents } from "@/lib/opendocs/utils/toc";
+import { Separator } from "@/components/ui/separator";
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 interface DefaultTableOfContentItemsProps {
-  sourceFilePath: string
+  sourceFilePath: string;
 
   messages: {
-    onThisPage: string
-    editPageOnGitHub: string
-    startDiscussionOnGitHub: string
-  }
+    onThisPage: string;
+    editPageOnGitHub: string;
+    startDiscussionOnGitHub: string;
+  };
 }
 
 interface DashboardTableOfContentsProps
   extends DefaultTableOfContentItemsProps {
-  toc: TableOfContents
+  toc: TableOfContents;
 }
 
 export function DashboardTableOfContents({
@@ -36,13 +36,13 @@ export function DashboardTableOfContents({
             .flatMap((item) => [item.url, item?.items?.map((item) => item.url)])
             .flat()
             .filter(Boolean)
-            .map((id) => id?.split('#')[1])
+            .map((id) => id?.split("#")[1])
         : [],
-    [toc]
-  )
+    [toc],
+  );
 
-  const mounted = useMounted()
-  const activeHeading = useActiveItem(itemIds as string[])
+  const mounted = useMounted();
+  const activeHeading = useActiveItem(itemIds as string[]);
 
   if (!toc?.items || !mounted) {
     return (
@@ -52,7 +52,7 @@ export function DashboardTableOfContents({
           sourceFilePath={sourceFilePath}
         />
       </div>
-    )
+    );
   }
 
   return (
@@ -70,7 +70,7 @@ export function DashboardTableOfContents({
         sourceFilePath={sourceFilePath}
       />
     </div>
-  )
+  );
 }
 
 function DefaultTableOfContentItems({
@@ -93,65 +93,65 @@ function DefaultTableOfContentItems({
         {messages.startDiscussionOnGitHub} <ExternalLink size={12} />
       </a>
     </div>
-  )
+  );
 }
 
 function useActiveItem(itemIds: string[]) {
-  const [activeId, setActiveId] = useState<string | null>(null)
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
+            setActiveId(entry.target.id);
           }
-        })
+        });
       },
-      { rootMargin: `0% 0% -80% 0%` }
-    )
+      { rootMargin: `0% 0% -80% 0%` },
+    );
 
     itemIds?.forEach((id) => {
-      const element = document.getElementById(id)
+      const element = document.getElementById(id);
 
       if (element) {
-        observer.observe(element)
+        observer.observe(element);
       }
-    })
+    });
 
     return () => {
       itemIds?.forEach((id) => {
-        const element = document.getElementById(id)
+        const element = document.getElementById(id);
 
         if (element) {
-          observer.unobserve(element)
+          observer.unobserve(element);
         }
-      })
-    }
-  }, [itemIds])
+      });
+    };
+  }, [itemIds]);
 
-  return activeId
+  return activeId;
 }
 
 interface TreeProps {
-  level?: number
-  activeItem?: string
-  tree: TableOfContents
+  level?: number;
+  activeItem?: string;
+  tree: TableOfContents;
 }
 
 function Tree({ tree, level = 1, activeItem }: TreeProps) {
   return tree?.items?.length && level < 3 ? (
-    <ul className={cn('m-0 list-none', { 'pl-4': level !== 1 })}>
+    <ul className={cn("m-0 list-none", { "pl-4": level !== 1 })}>
       {tree.items.map((item, index) => {
         return (
-          <li key={index} className={cn('mt-0 pt-2')}>
+          <li key={index} className={cn("mt-0 pt-2")}>
             <a
               href={item.url}
               className={cn(
-                'hover:text-foreground inline-block no-underline transition-colors',
+                "hover:text-foreground inline-block no-underline transition-colors",
                 item.url === `#${activeItem}`
-                  ? 'text-foreground border-l-primary-active border-l-2 pl-2 font-medium'
-                  : 'text-muted-foreground'
+                  ? "text-foreground border-l-primary-active border-l-2 pl-2 font-medium"
+                  : "text-muted-foreground",
               )}
             >
               {item.title}
@@ -161,8 +161,8 @@ function Tree({ tree, level = 1, activeItem }: TreeProps) {
               <Tree tree={item} level={level + 1} activeItem={activeItem} />
             ) : null}
           </li>
-        )
+        );
       })}
     </ul>
-  ) : null
+  ) : null;
 }

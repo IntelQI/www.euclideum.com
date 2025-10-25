@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import { Link, usePathname } from '@/navigation'
-import { Icons } from '@/components/icons'
-import { siteConfig } from '@/config/site'
-import { cn } from '@/lib/utils'
+import { Link, usePathname } from "@/navigation";
+import { Icons } from "@/components/icons";
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 interface MainNavProps {
-  messages: {
-    docs: string
-    blog: string
-  }
+  messages?: {
+    docs: string;
+    blog: string;
+  };
 }
 
-export function MainNav({ messages }: MainNavProps) {
-  const pathname = usePathname()
+export function MainNav({ messages }: MainNavProps = {}) {
+  const pathname = usePathname();
 
   return (
     <div className="hidden md:flex items-center">
@@ -47,10 +47,13 @@ export function MainNav({ messages }: MainNavProps) {
           <Icons.chevronDown className="size-3" />
         </div>
 
-        <a href="/pricing" className="text-white hover:text-gray-300 transition-colors text-sm">
+        <a
+          href="/pricing"
+          className="text-white hover:text-gray-300 transition-colors text-sm"
+        >
           Pricing
         </a>
       </nav>
     </div>
-  )
+  );
 }

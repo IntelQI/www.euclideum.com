@@ -62,7 +62,7 @@ const blogComputedFields: ComputedFields = {
 
       return {
         ...author,
-        bio: author.bio?.[locale as keyof typeof author.bio] || author.bio?.en,
+        bio: author.bio,
       }
     },
   },

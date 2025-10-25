@@ -1,84 +1,81 @@
-import { type Doc, allDocs } from 'contentlayer/generated'
+import { type Doc, allDocs } from "contentlayer/generated";
 
-import type { NavItem, SidebarNavItem } from '../types/nav'
-import type { DocPageProps } from '../types/docs'
+import type { NavItem, SidebarNavItem } from "../types/nav";
 
-import { getSlugWithoutLocale } from './locale'
-import { defaultLocale } from '@/config/i18n'
-import { docsConfig } from '@/config/docs'
+import { docsConfig } from "@/config/docs";
 
-export function makeLocalizedSlug({ locale, slug }: DocPageProps['params']) {
-  const _slug = slug?.join('/')
-  const _locale = locale || defaultLocale
+interface DocPageParams {
+  params: {
+    slug?: string[];
+  };
+}
 
-  const localizedSlug = [_locale, _slug].filter(Boolean).join('/')
-
-  return localizedSlug
+export function makeSlug(slug?: string[]) {
+  return slug?.join("/") || "";
 }
 
 export async function getDocFromParams({
   params,
-}: DocPageProps): Promise<(Doc & { notAvailable: boolean }) | null> {
-  let localizedSlug = makeLocalizedSlug(params)
-  let doc = allDocs.find((doc) => doc.slugAsParams === localizedSlug)
+}: DocPageParams): Promise<Doc | null> {
+  const slug = makeSlug(params.slug);
 
-  if (!doc) {
-    localizedSlug = makeLocalizedSlug({
-      ...params,
-      locale: defaultLocale,
-    })
+  // Find doc by matching slug (skip first part which was locale)
+  const doc = allDocs.find((doc) => {
+    const [, ...docSlugParts] = doc.slugAsParams.split("/");
+    return docSlugParts.join("/") === slug;
+  });
 
-    doc = allDocs.find((doc) => doc.slugAsParams === localizedSlug)
-
-    return doc ? { ...doc, notAvailable: true } : null
-  }
-
-  return { ...doc, notAvailable: false }
+  return doc || null;
 }
 
 export function getBreadcrumb(docSlug: string) {
-  const slug = getSlugWithoutLocale(docSlug, 'docs')
+  // Remove 'en/' prefix if it exists
+  const slug = docSlug.replace(/^en\//, "");
 
   const findBreadcrumbPath = (
     items: SidebarNavItem[],
     slug: string,
-    path: SidebarNavItem[] = []
+    path: SidebarNavItem[] = [],
   ): NavItem[] | null => {
     for (const item of items) {
-      const newPath = [...path, item]
+      const newPath = [...path, item];
 
-      if (item.href === slug) {
-        return newPath
+      // Compare without leading slash
+      const itemHref = item.href?.replace(/^\//, "");
+      const searchSlug = slug.replace(/^\//, "");
+
+      if (itemHref === searchSlug) {
+        return newPath;
       }
 
       if (item.items) {
-        const foundPath = findBreadcrumbPath(item.items, slug, newPath)
+        const foundPath = findBreadcrumbPath(item.items, slug, newPath);
 
         if (foundPath) {
-          return foundPath
+          return foundPath;
         }
       }
     }
 
-    return null
-  }
+    return null;
+  };
 
   const makeBreadcrumb = (
     slug: string,
-    config: typeof docsConfig
+    config: typeof docsConfig,
   ): NavItem[] | null => {
     for (const nav of config.sidebarNav) {
-      const path = findBreadcrumbPath([nav], slug)
+      const path = findBreadcrumbPath([nav], slug);
 
       if (path) {
-        return path
+        return path;
       }
     }
 
-    return null
-  }
+    return null;
+  };
 
-  const breadcrumbs = makeBreadcrumb(slug, docsConfig)
+  const breadcrumbs = makeBreadcrumb(slug, docsConfig);
 
-  return breadcrumbs || []
+  return breadcrumbs || [];
 }

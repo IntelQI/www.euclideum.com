@@ -1,40 +1,52 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 
 import {
   Sheet,
   SheetTitle,
   SheetTrigger,
   SheetContent,
-} from '@/components/ui/sheet'
+} from "@/components/ui/sheet";
 
-import { getObjectValueByLocale } from '@/lib/opendocs/utils/locale'
-import { useDocsConfig } from '@/lib/opendocs/hooks/use-docs-config'
-import { DocsSidebarNav } from './docs/sidebar-nav'
-import { ScrollArea } from './ui/scroll-area'
-import { siteConfig } from '@/config/site'
-import { Icons } from '@/components/icons'
-import { MobileLink } from './mobile-link'
-import { blogConfig } from '@/config/blog'
-import { usePathname } from '@/navigation'
-import { Button } from './ui/button'
+// Helper to extract title
+const getTitle = (title: any): string => {
+  if (typeof title === "string") return title;
+  if (title?.en) return title.en;
+  return String(title);
+};
+import { useDocsConfig } from "@/lib/opendocs/hooks/use-docs-config";
+import { DocsSidebarNav } from "./docs/sidebar-nav";
+import { ScrollArea } from "./ui/scroll-area";
+import { siteConfig } from "@/config/site";
+import { Icons } from "@/components/icons";
+import { MobileLink } from "./mobile-link";
+import { blogConfig } from "@/config/blog";
+import { usePathname } from "@/navigation";
+import { Button } from "./ui/button";
 
 interface MobileNavProps {
-  menuLinks: JSX.Element
+  menuLinks: JSX.Element;
 
-  messages: {
-    menu: string
-    toggleMenu: string
-  }
+  messages?: {
+    menu: string;
+    toggleMenu: string;
+  };
 }
 
-export function MobileNav({ messages, menuLinks }: MobileNavProps) {
-  const pathname = usePathname()
-  const docsConfig = useDocsConfig()
-  const [open, setOpen] = useState(false)
+export function MobileNav({
+  messages: propMessages,
+  menuLinks,
+}: MobileNavProps) {
+  const messages = propMessages || {
+    menu: "Menu",
+    toggleMenu: "Toggle Menu",
+  };
+  const pathname = usePathname();
+  const docsConfig = useDocsConfig();
+  const [open, setOpen] = useState(false);
 
-  const shouldDisplayDocsSidebarContent = pathname.startsWith('/docs')
+  const shouldDisplayDocsSidebarContent = pathname.startsWith("/docs");
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -70,7 +82,9 @@ export function MobileNav({ messages, menuLinks }: MobileNavProps) {
           <div className="flex flex-col space-y-3">
             {/* Main Navigation Items */}
             <div className="space-y-2">
-              <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Navigation</div>
+              <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                Navigation
+              </div>
               <MobileLink href="/products" onOpenChange={setOpen}>
                 Products
               </MobileLink>
@@ -90,7 +104,9 @@ export function MobileNav({ messages, menuLinks }: MobileNavProps) {
 
             {/* Action Items */}
             <div className="space-y-2 pt-4 border-t">
-              <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Actions</div>
+              <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                Actions
+              </div>
               <MobileLink href="/support" onOpenChange={setOpen}>
                 Support
               </MobileLink>
@@ -104,7 +120,9 @@ export function MobileNav({ messages, menuLinks }: MobileNavProps) {
 
             {/* Language Selector */}
             <div className="space-y-2 pt-4 border-t">
-              <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Language</div>
+              <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                Language
+              </div>
               <div className="flex items-center space-x-2 text-gray-700">
                 <Icons.globe className="size-4" />
                 <span className="text-sm">English</span>
@@ -114,7 +132,7 @@ export function MobileNav({ messages, menuLinks }: MobileNavProps) {
             {/* Original Blog and Docs Navigation */}
             {blogConfig.mainNav?.map((item) => (
               <MobileLink key={item.href} href="/blog" onOpenChange={setOpen}>
-                {getObjectValueByLocale(item.title, docsConfig.currentLocale)}
+                {getTitle(item.title)}
               </MobileLink>
             ))}
 
@@ -126,12 +144,9 @@ export function MobileNav({ messages, menuLinks }: MobileNavProps) {
                     href={item.href}
                     onOpenChange={setOpen}
                   >
-                    {getObjectValueByLocale(
-                      item.title,
-                      docsConfig.currentLocale
-                    )}
+                    {getTitle(item.title)}
                   </MobileLink>
-                )
+                ),
             )}
           </div>
 
@@ -139,7 +154,6 @@ export function MobileNav({ messages, menuLinks }: MobileNavProps) {
             {shouldDisplayDocsSidebarContent && (
               <DocsSidebarNav
                 isMobile
-                locale={docsConfig.currentLocale}
                 items={docsConfig.docs.sidebarNav}
                 handleMobileSidebar={setOpen}
               />
@@ -148,5 +162,5 @@ export function MobileNav({ messages, menuLinks }: MobileNavProps) {
         </ScrollArea>
       </SheetContent>
     </Sheet>
-  )
+  );
 }

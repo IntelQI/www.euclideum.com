@@ -1,41 +1,46 @@
-'use client'
+"use client";
 
-import { ArrowUpRight, ChevronDown } from 'lucide-react'
-import { type PointerEvent, useState } from 'react'
+import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { type PointerEvent, useState } from "react";
 
-import { useIsMobile } from '@/lib/opendocs/hooks/use-is-mobile'
-import { Button } from '@/components/ui/button'
-import { siteConfig } from '@/config/site'
-import { useRouter } from '@/navigation'
+import { useIsMobile } from "@/lib/opendocs/hooks/use-is-mobile";
+import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
+import { useRouter } from "@/navigation";
 
 import {
   DropdownMenu,
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuContent,
-} from '@/components/ui/dropdown-menu'
+} from "@/components/ui/dropdown-menu";
 
 interface VersionDropdownProps {
-  messages: {
-    changelog: string
-  }
+  messages?: {
+    changelog: string;
+  };
 }
 
-export function VersionDropdown({ messages }: VersionDropdownProps) {
-  const router = useRouter()
-  const isMobile = useIsMobile()
-  const [open, setOpen] = useState(false)
+export function VersionDropdown({
+  messages: propMessages,
+}: VersionDropdownProps = {}) {
+  const messages = propMessages || {
+    changelog: "Changelog",
+  };
+  const router = useRouter();
+  const isMobile = useIsMobile();
+  const [open, setOpen] = useState(false);
 
   function openDropdown() {
-    setOpen(() => true)
+    setOpen(() => true);
   }
 
   function closeDropdown(element: PointerEvent<HTMLElement>) {
-    const target = element.relatedTarget as Element
+    const target = element.relatedTarget as Element;
 
-    if ('closest' in target && target.closest('[role=menu]')) return
+    if ("closest" in target && target.closest("[role=menu]")) return;
 
-    setOpen(() => false)
+    setOpen(() => false);
   }
 
   return (
@@ -65,11 +70,11 @@ export function VersionDropdown({ messages }: VersionDropdownProps) {
         onCloseAutoFocus={(e) => e.preventDefault()}
       >
         <div className="w-full">
-          <DropdownMenuItem onClick={() => router.push('/docs/changelog')}>
+          <DropdownMenuItem onClick={() => router.push("/docs/changelog")}>
             {messages.changelog} <ArrowUpRight className="ml-1 size-3" />
           </DropdownMenuItem>
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

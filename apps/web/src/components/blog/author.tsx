@@ -1,9 +1,9 @@
-import { LinkedInLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
-import { Globe, Mail } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
+import { LinkedInLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
+import { Globe, Mail } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-import type { Blog } from 'contentlayer/generated'
+import type { Blog } from "contentlayer/generated";
 
 import {
   Card,
@@ -11,19 +11,19 @@ import {
   CardHeader,
   CardContent,
   CardDescription,
-} from '@/components/ui/card'
+} from "@/components/ui/card";
 
-import { buttonVariants } from '../ui/button'
-import { cn } from '@/lib/utils'
-import { Icons } from '../icons'
+import { buttonVariants } from "../ui/button";
+import { cn } from "@/lib/utils";
+import { Icons } from "../icons";
 
 export function AuthorCard({ post }: { post: Blog }) {
-  const { author } = post
+  const { author } = post;
 
   return (
     <Card className="backdrop-blur-lg dark:bg-card-primary w-full">
       <CardHeader
-        className={cn('flex gap-4 flex-wrap', 'flex-row items-center')}
+        className={cn("flex gap-4 flex-wrap", "flex-row items-center")}
       >
         {author?.image && (
           <Image
@@ -51,11 +51,11 @@ export function AuthorCard({ post }: { post: Blog }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  'text-accent-foreground w-fit',
+                  "text-accent-foreground w-fit",
                   buttonVariants({
-                    variant: 'ghost',
+                    variant: "ghost",
                   }),
-                  'px-2'
+                  "px-2",
                 )}
               >
                 <Globe size={16} />
@@ -70,11 +70,11 @@ export function AuthorCard({ post }: { post: Blog }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  'text-accent-foreground w-fit',
+                  "text-accent-foreground w-fit",
                   buttonVariants({
-                    variant: 'ghost',
+                    variant: "ghost",
                   }),
-                  'px-2'
+                  "px-2",
                 )}
               >
                 <Icons.gitHub className="size-4" />
@@ -89,11 +89,11 @@ export function AuthorCard({ post }: { post: Blog }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  'text-accent-foreground w-fit',
+                  "text-accent-foreground w-fit",
                   buttonVariants({
-                    variant: 'ghost',
+                    variant: "ghost",
                   }),
-                  'px-2'
+                  "px-2",
                 )}
               >
                 <TwitterLogoIcon />
@@ -108,11 +108,11 @@ export function AuthorCard({ post }: { post: Blog }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  'text-accent-foreground w-fit',
+                  "text-accent-foreground w-fit",
                   buttonVariants({
-                    variant: 'ghost',
+                    variant: "ghost",
                   }),
-                  'px-2'
+                  "px-2",
                 )}
               >
                 <LinkedInLogoIcon />
@@ -127,11 +127,11 @@ export function AuthorCard({ post }: { post: Blog }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  'text-accent-foreground w-fit',
+                  "text-accent-foreground w-fit",
                   buttonVariants({
-                    variant: 'ghost',
+                    variant: "ghost",
                   }),
-                  'px-2'
+                  "px-2",
                 )}
               >
                 <Icons.youtube className="size-4" />
@@ -146,11 +146,11 @@ export function AuthorCard({ post }: { post: Blog }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  'text-accent-foreground w-fit',
+                  "text-accent-foreground w-fit",
                   buttonVariants({
-                    variant: 'ghost',
+                    variant: "ghost",
                   }),
-                  'px-2'
+                  "px-2",
                 )}
               >
                 <Mail size={16} />
@@ -160,5 +160,5 @@ export function AuthorCard({ post }: { post: Blog }) {
         </div>
       </CardHeader>
     </Card>
-  )
+  );
 }

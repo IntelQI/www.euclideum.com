@@ -1,10 +1,8 @@
-import { locale } from '@/config/i18n'
+// Simple stub types for i18n - single locale only
+export type LocaleOptions = 'en';
+export type Locales = readonly ['en'];
 
-export type Locales = (keyof typeof locale)[]
-export type LocaleOptions = Locales[number]
+export type LocalizedRecord<T = string> = Record<LocaleOptions, T>;
 
-export type LocalizedRecord = Partial<{
-  [key in LocaleOptions]: string
-}>
-
-export type IntlMessages = typeof import('@/i18n/locales/en.json')
+// Type for translations - now just a simple object
+export type IntlMessages = Record<string, any>;

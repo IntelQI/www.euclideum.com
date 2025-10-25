@@ -1,44 +1,42 @@
-'use client'
+"use client";
 
-import { type PointerEvent, useState } from 'react'
-import { useLocale } from 'next-intl'
-import ExternalLink from 'next/link'
-import { Rss } from 'lucide-react'
+import { type PointerEvent, useState } from "react";
+import ExternalLink from "next/link";
+import { Rss } from "lucide-react";
 
-import { useIsMobile } from '@/lib/opendocs/hooks/use-is-mobile'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { blogConfig } from '@/config/blog'
-import { cn } from '@/lib/utils'
+import { useIsMobile } from "@/lib/opendocs/hooks/use-is-mobile";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { blogConfig } from "@/config/blog";
+import { cn } from "@/lib/utils";
 
 import {
   DropdownMenu,
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuContent,
-} from '@/components/ui/dropdown-menu'
+} from "@/components/ui/dropdown-menu";
 
 interface RSSToggleProps {
-  messages: {
-    rss_feed: string
-  }
+  messages?: {
+    rss_feed: string;
+  };
 }
 
-export function RSSToggle({ messages }: RSSToggleProps) {
-  const isMobile = useIsMobile()
-  const currentLocale = useLocale()
-
-  const [open, setOpen] = useState(false)
+export function RSSToggle({ messages }: RSSToggleProps = {}) {
+  const isMobile = useIsMobile();
+  const [open, setOpen] = useState(false);
+  const label = messages?.rss_feed || "RSS Feed";
 
   function openDropdown() {
-    setOpen(() => true)
+    setOpen(() => true);
   }
 
   function closeDropdown(element: PointerEvent<HTMLElement>) {
-    const target = element.relatedTarget as Element
+    const target = element.relatedTarget as Element;
 
-    if ('closest' in target && target.closest('[role=menu]')) return
+    if ("closest" in target && target.closest("[role=menu]")) return;
 
-    setOpen(() => false)
+    setOpen(() => false);
   }
 
   return (
@@ -47,13 +45,13 @@ export function RSSToggle({ messages }: RSSToggleProps) {
         <Button
           variant="ghost"
           className={cn(
-            'flex place-self-end transition-all group pointer-events-auto relative w-fit gap-1 px-2',
-            buttonVariants({ variant: 'ghost' }),
-            'hover:text-amber-600',
-            'aria-expanded:text-amber-600'
+            "flex place-self-end transition-all group pointer-events-auto relative w-fit gap-1 px-2",
+            buttonVariants({ variant: "ghost" }),
+            "hover:text-amber-600",
+            "aria-expanded:text-amber-600",
           )}
           aria-expanded={open}
-          aria-label={messages.rss_feed}
+          aria-label={label}
           onClick={() => isMobile && openDropdown()}
           onPointerEnter={() => !isMobile && openDropdown()}
           onPointerLeave={(event) => !isMobile && closeDropdown(event)}
@@ -63,7 +61,7 @@ export function RSSToggle({ messages }: RSSToggleProps) {
             size={20}
           />
 
-          <span className="sr-only">{messages.rss_feed}</span>
+          <span className="sr-only">{label}</span>
           <span className="pointer-events-auto absolute z-10 block h-14 w-full" />
         </Button>
       </DropdownMenuTrigger>
@@ -82,7 +80,7 @@ export function RSSToggle({ messages }: RSSToggleProps) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={type}
-                href={`/${currentLocale}/feed/${file}`}
+                href={`/feed/${file}`}
               >
                 {type}
               </ExternalLink>
@@ -91,5 +89,5 @@ export function RSSToggle({ messages }: RSSToggleProps) {
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

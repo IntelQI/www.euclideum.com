@@ -1,9 +1,9 @@
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 interface CalloutProps {
-  icon?: string
-  title?: string
-  children?: React.ReactNode
+  icon?: string;
+  title?: string;
+  children?: React.ReactNode;
 }
 
 export function Callout({ title, children, icon, ...props }: CalloutProps) {
@@ -15,5 +15,5 @@ export function Callout({ title, children, icon, ...props }: CalloutProps) {
 
       <AlertDescription>{children}</AlertDescription>
     </Alert>
-  )
+  );
 }

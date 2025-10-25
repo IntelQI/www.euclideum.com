@@ -7,15 +7,15 @@
  * - src/lib/opendocs/components/docs/pager.tsx
  */
 
-import type { DocsConfig } from '@/lib/opendocs/types/docs'
+import type { DocsConfig } from "@/lib/opendocs/types/docs";
 
 export const docsConfig: DocsConfig = {
   mainNav: [
     {
-      href: '/docs',
+      href: "/docs",
 
       title: {
-        en: 'Documentation',
+        en: "Documentation",
       },
     },
   ],
@@ -23,35 +23,35 @@ export const docsConfig: DocsConfig = {
   sidebarNav: [
     {
       title: {
-        en: 'Getting Started',
+        en: "Getting Started",
       },
 
       items: [
         {
-          href: '/docs',
+          href: "/docs",
 
           title: {
-            en: 'Introduction',
+            en: "Introduction",
           },
 
           items: [],
         },
 
         {
-          href: '/docs/adding-new-docs',
+          href: "/docs/adding-new-docs",
 
           title: {
-            en: 'Adding new docs',
+            en: "Adding new docs",
           },
 
           items: [],
         },
 
         {
-          href: '/docs/customizing',
+          href: "/docs/customizing",
 
           title: {
-            en: 'Customizing',
+            en: "Customizing",
           },
 
           items: [],
@@ -59,51 +59,51 @@ export const docsConfig: DocsConfig = {
 
         {
           title: {
-            en: 'MDX',
+            en: "MDX",
           },
 
           label: {
-            en: 'New',
+            en: "New",
           },
 
           items: [
             {
-              href: '/docs/mdx/frontmatter',
+              href: "/docs/mdx/frontmatter",
 
               title: {
-                en: 'Frontmatter',
+                en: "Frontmatter",
               },
 
               label: {
-                en: 'New',
+                en: "New",
               },
 
               items: [],
             },
 
             {
-              href: '/docs/mdx/code',
+              href: "/docs/mdx/code",
 
               title: {
-                en: 'Code',
+                en: "Code",
               },
 
               label: {
-                en: 'New',
+                en: "New",
               },
 
               items: [],
             },
 
             {
-              href: '/docs/mdx/components',
+              href: "/docs/mdx/components",
 
               title: {
-                en: 'Components',
+                en: "Components",
               },
 
               label: {
-                en: 'New',
+                en: "New",
               },
 
               items: [],
@@ -112,10 +112,10 @@ export const docsConfig: DocsConfig = {
         },
 
         {
-          href: '/docs/changelog',
+          href: "/docs/changelog",
 
           title: {
-            en: 'Changelog',
+            en: "Changelog",
           },
 
           items: [],
@@ -123,4 +123,4 @@ export const docsConfig: DocsConfig = {
       ],
     },
   ],
-} as const
+} as const;

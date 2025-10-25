@@ -1,12 +1,12 @@
-import type { Blog } from 'contentlayer/generated'
+import type { Blog } from "contentlayer/generated";
 
-import { badgeVariants } from '../ui/badge'
-import { Link } from '@/navigation'
-import { cn } from '@/lib/utils'
+import { badgeVariants } from "../ui/badge";
+import { Link } from "@/navigation";
+import { cn } from "@/lib/utils";
 
 export function BlogPostTags({ post }: { post: Blog }) {
   if (!post.tags) {
-    return null
+    return null;
   }
 
   return (
@@ -15,11 +15,11 @@ export function BlogPostTags({ post }: { post: Blog }) {
         <Link
           key={tag}
           href={`/blog?tag=${encodeURI(tag)}`}
-          className={cn(badgeVariants({ variant: 'secondary' }), 'gap-1')}
+          className={cn(badgeVariants({ variant: "secondary" }), "gap-1")}
         >
           {tag}
         </Link>
       ))}
     </div>
-  )
+  );
 }

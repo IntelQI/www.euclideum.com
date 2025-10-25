@@ -1,7 +1,7 @@
-'use client'
-import { useEffect } from 'react'
-import { motion, stagger, useAnimate } from 'framer-motion'
-import { cn } from '@/lib/utils'
+"use client";
+import { useEffect } from "react";
+import { motion, stagger, useAnimate } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export const TextGenerateEffect = ({
   words,
@@ -9,25 +9,25 @@ export const TextGenerateEffect = ({
   filter = true,
   duration = 0.5,
 }: {
-  words: string
-  className?: string
-  filter?: boolean
-  duration?: number
+  words: string;
+  className?: string;
+  filter?: boolean;
+  duration?: number;
 }) => {
-  const [scope, animate] = useAnimate()
-  let wordsArray = words.split(' ')
+  const [scope, animate] = useAnimate();
+  let wordsArray = words.split(" ");
   useEffect(() => {
     animate(
-      'span',
+      "span",
       {
         opacity: 1,
-        filter: filter ? 'blur(0px)' : 'none',
+        filter: filter ? "blur(0px)" : "none",
       },
       {
         duration: duration ? duration : 1,
         delay: stagger(0.2),
-      }
-    )
+      },
+    );
     // eslint-disable-next-line
   }, [scope.current]);
 
@@ -38,18 +38,18 @@ export const TextGenerateEffect = ({
           return (
             <motion.span
               key={word + idx}
-              className={cn('dark:text-white text-black opacity-0', className)}
+              className={cn("dark:text-white text-black opacity-0", className)}
               style={{
-                filter: filter ? 'blur(10px)' : 'none',
+                filter: filter ? "blur(10px)" : "none",
               }}
             >
-              {word}{' '}
+              {word}{" "}
             </motion.span>
-          )
+          );
         })}
       </motion.div>
-    )
-  }
+    );
+  };
 
-  return renderWords()
-}
+  return renderWords();
+};

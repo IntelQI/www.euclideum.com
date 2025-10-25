@@ -1,51 +1,58 @@
-'use client'
+"use client";
 
-import { type PointerEvent, useState, useMemo } from 'react'
-import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
-import { ChevronDown } from 'lucide-react'
-import { useTheme } from 'next-themes'
+import { type PointerEvent, useState, useMemo } from "react";
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { ChevronDown } from "lucide-react";
+import { useTheme } from "next-themes";
 
-import { useIsMobile } from '@/lib/opendocs/hooks/use-is-mobile'
-import { Button } from '@/components/ui/button'
+import { useIsMobile } from "@/lib/opendocs/hooks/use-is-mobile";
+import { Button } from "@/components/ui/button";
 
 import {
   DropdownMenu,
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuContent,
-} from './ui/dropdown-menu'
+} from "./ui/dropdown-menu";
 
 interface ThemeModeToggleProps {
-  messages: {
-    dark: string
-    light: string
-    system: string
-  }
+  messages?: {
+    dark: string;
+    light: string;
+    system: string;
+  };
 }
 
-export function ThemeModeToggle({ messages }: ThemeModeToggleProps) {
-  const isMobile = useIsMobile()
-  const { theme, setTheme } = useTheme()
-  const [open, setOpen] = useState(false)
+export function ThemeModeToggle({
+  messages: propMessages,
+}: ThemeModeToggleProps = {}) {
+  const messages = propMessages || {
+    dark: "Dark",
+    light: "Light",
+    system: "System",
+  };
+  const isMobile = useIsMobile();
+  const { theme, setTheme } = useTheme();
+  const [open, setOpen] = useState(false);
 
   const themes = useMemo(() => {
     return [
-      { label: messages.dark, value: 'dark' },
-      { label: messages.light, value: 'light' },
-      { label: messages.system, value: 'system' },
-    ]
-  }, [messages])
+      { label: messages.dark, value: "dark" },
+      { label: messages.light, value: "light" },
+      { label: messages.system, value: "system" },
+    ];
+  }, [messages]);
 
   function openDropdown() {
-    setOpen(() => true)
+    setOpen(() => true);
   }
 
   function closeDropdown(element: PointerEvent<HTMLElement>) {
-    const target = element.relatedTarget as Element
+    const target = element.relatedTarget as Element;
 
-    if ('closest' in target && target.closest('[role=menu]')) return
+    if ("closest" in target && target.closest("[role=menu]")) return;
 
-    setOpen(() => false)
+    setOpen(() => false);
   }
 
   return (
@@ -88,5 +95,5 @@ export function ThemeModeToggle({ messages }: ThemeModeToggleProps) {
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

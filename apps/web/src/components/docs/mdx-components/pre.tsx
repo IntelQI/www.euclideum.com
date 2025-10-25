@@ -1,7 +1,7 @@
-import { CopyButton, CopyNpmCommandButton } from './copy-button'
-import { cn } from '@/lib/utils'
+import { CopyButton, CopyNpmCommandButton } from "./copy-button";
+import { cn } from "@/lib/utils";
 
-import type { NpmCommands } from '@/lib/opendocs/types/unist'
+import type { NpmCommands } from "@/lib/opendocs/types/unist";
 
 export const pre = ({
   className,
@@ -15,17 +15,17 @@ export const pre = ({
   __pnpmCommand__,
   ...props
 }: React.HTMLAttributes<HTMLPreElement> & {
-  __src__?: string
-  __rawString__?: string
-  __withMeta__?: boolean
-  __style__?: 'default' | 'new-york'
+  __src__?: string;
+  __rawString__?: string;
+  __withMeta__?: boolean;
+  __style__?: "default" | "new-york";
 } & NpmCommands) => {
   return (
     <div className="relative">
       <pre
         className={cn(
-          'mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border bg-zinc-950 py-4 text-white dark:bg-zinc-900',
-          className
+          "mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border bg-zinc-950 py-4 text-white dark:bg-zinc-900",
+          className,
         )}
         {...props}
       />
@@ -34,7 +34,7 @@ export const pre = ({
         <CopyButton
           value={__rawString__}
           src={__src__}
-          className={cn('absolute right-4 top-4', __withMeta__ && 'top-16')}
+          className={cn("absolute right-4 top-4", __withMeta__ && "top-16")}
         />
       )}
       {__npmCommand__ &&
@@ -48,9 +48,9 @@ export const pre = ({
               __yarnCommand__,
               __pnpmCommand__,
             }}
-            className={cn('absolute right-4 top-4', __withMeta__ && 'top-16')}
+            className={cn("absolute right-4 top-4", __withMeta__ && "top-16")}
           />
         )}
     </div>
-  )
-}
+  );
+};

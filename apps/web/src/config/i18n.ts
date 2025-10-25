@@ -1,17 +1,20 @@
-import type { Locales, LocalizedRecord } from '@/lib/opendocs/types/i18n'
-
-export const defaultLocale = 'en' as const
+// Simple stub for i18n - single locale only
+export const defaultLocale = "en" as const;
 
 export const locale = {
   en: defaultLocale,
-} as const
+} as const;
 
 export const labels = {
-  [defaultLocale]: 'English',
-} as const
+  [defaultLocale]: "English",
+} as const;
 
-export const dateLocales: LocalizedRecord = {
-  en: 'en-US',
-} as const
+export const dateLocales = {
+  en: "en-US",
+} as const;
 
-export const locales = Object.values(locale) as Locales
+export const locales = [defaultLocale] as const;
+
+export type LocaleOptions = typeof defaultLocale;
+export type Locales = typeof locales;
+export type LocalizedRecord<T = string> = Record<LocaleOptions, T>;

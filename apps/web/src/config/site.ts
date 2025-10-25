@@ -1,17 +1,15 @@
-import { absoluteUrl } from '@/lib/utils'
-import en from '@/i18n/locales/en.json'
+import { absoluteUrl } from "@/lib/utils";
 
 export const siteConfig = {
-  name: 'opendocs',
+  name: "opendocs",
 
-  description: {
-    en: en.site.description,
-  },
+  description:
+    "Beautifully designed template that you can use for your projects for free. Accessible. Customizable. Open Source.",
 
   url: process.env.NEXT_PUBLIC_APP_URL,
 
   og: {
-    image: absoluteUrl('/og.jpg'),
+    image: absoluteUrl("/og.jpg"),
 
     size: {
       width: 1200,
@@ -20,26 +18,26 @@ export const siteConfig = {
   },
 
   app: {
-    latestVersion: '3.0.8',
+    latestVersion: "3.0.8",
   },
 
   author: {
-    name: 'Dalton Menezes',
-    site: 'https://daltonmenezes.com',
+    name: "Dalton Menezes",
+    site: "https://daltonmenezes.com",
   },
 
   links: {
     twitter: {
-      label: 'Twitter',
-      username: '@daltonmenezes',
-      url: 'https://twitter.com/daltonmenezes',
+      label: "Twitter",
+      username: "@daltonmenezes",
+      url: "https://twitter.com/daltonmenezes",
     },
 
     github: {
-      label: 'GitHub',
-      url: 'https://github.com/daltonmenezes/opendocs',
+      label: "GitHub",
+      url: "https://github.com/daltonmenezes/opendocs",
     },
   },
-} as const
+} as const;
 
-export type SiteConfig = typeof siteConfig
+export type SiteConfig = typeof siteConfig;
