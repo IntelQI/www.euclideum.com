@@ -21,70 +21,61 @@ export async function SiteHeader() {
   const t = await getTranslations('site')
 
   return (
-    <header className={'sticky top-0 z-50 w-full backdrop-blur'}>
-      <div className="container flex h-14 max-w-screen-2xl items-center">
-        <MainNav
-          messages={{
-            docs: t('words.docs'),
-            blog: t('words.blog'),
-          }}
-        />
+    <header className="sticky top-0 z-50 w-full">
+      {/* Green top border */}
+      <div className="h-0.5 bg-[#00ED64]"></div>
+      
+      {/* Main header */}
+      <div className="bg-[#001E2B] py-2 md:py-3">
+        <div className="container flex h-14 md:h-16 max-w-screen-2xl items-center px-4 md:px-6">
+          {/* Mobile Navigation - Only visible on mobile */}
+          <MobileNav
+            messages={{
+              menu: t('words.menu'),
+              toggleMenu: t('buttons.toggle_menu'),
+            }}
+            menuLinks={<SiteHeaderMenuLinks />}
+          />
 
-        <MobileNav
-          messages={{
-            menu: t('words.menu'),
-            toggleMenu: t('buttons.toggle_menu'),
-          }}
-          menuLinks={<SiteHeaderMenuLinks />}
-        />
+          {/* Desktop Navigation - Hidden on mobile */}
+          <MainNav
+            messages={{
+              docs: t('words.docs'),
+              blog: t('words.blog'),
+            }}
+          />
 
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
-            <CommandMenu
-              messages={{
-                docs: t('words.docs'),
-                blog: t('words.blog'),
-                search: t('search.search'),
-                noResultsFound: t('search.no_results_found'),
-                typeCommandOrSearch: t('search.type_command_or_search'),
-                searchDocumentation: t('search.search_documentation'),
+          {/* Right side actions */}
+          <div className="flex flex-1 items-center justify-end space-x-2 md:space-x-4 lg:space-x-6">
+            {/* Search Icon - Always visible */}
+            <button className="text-white hover:text-gray-300 transition-colors p-1">
+              <Icons.search className="size-4 md:size-5" />
+            </button>
 
-                themes: {
-                  dark: t('themes.dark'),
-                  theme: t('themes.theme'),
-                  light: t('themes.light'),
-                  system: t('themes.system'),
-                },
-              }}
-            />
-          </div>
-
-          <nav className="flex items-center">
-            <VersionDropdown
-              messages={{
-                changelog: t('changelog'),
-              }}
-            />
-
-            <I18nToggle
-              messages={{
-                toggleLanguage: t('buttons.toggle_language'),
-              }}
-            />
-
-            <ThemeModeToggle
-              messages={{
-                dark: t('themes.dark'),
-                light: t('themes.light'),
-                system: t('themes.system'),
-              }}
-            />
-
-            <div className="phone:flex hidden items-center">
-              <Separator orientation="vertical" className="mx-1 h-5" />
-              <SiteHeaderMenuLinks />
+            {/* Language Selector - Hidden on small screens, visible on md+ */}
+            <div className="hidden md:flex items-center space-x-1 text-white hover:text-gray-300 transition-colors cursor-pointer">
+              <Icons.globe className="size-4" />
+              <span className="text-sm">Eng</span>
+              <Icons.chevronDown className="size-3" />
             </div>
-          </nav>
+
+            {/* Support Link - Hidden on small screens, visible on lg+ */}
+            <a href="/support" className="hidden lg:block text-white hover:text-gray-300 transition-colors text-sm">
+              Support
+            </a>
+
+            {/* Get Started Link - Hidden on small screens, visible on lg+ */}
+            <a href="/get-started" className="hidden lg:block text-white hover:text-gray-300 transition-colors text-sm">
+              Get Started
+            </a>
+
+            {/* Sign In Button - Always visible but smaller on mobile */}
+            <a href="/signin">
+              <button className="bg-[#00ED64] hover:bg-[#00D55A] text-black font-medium px-2 py-1 md:px-4 md:py-2 rounded-md text-xs md:text-sm transition-colors">
+                Sign In
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </header>
@@ -94,7 +85,7 @@ export async function SiteHeader() {
 export function SiteHeaderMenuLinks() {
   return (
     <>
-      <Link href={siteConfig.links.github.url} target="_blank" rel="noreferrer">
+      <a href={siteConfig.links.github.url} target="_blank" rel="noreferrer">
         <div
           className={cn(
             buttonVariants({
@@ -106,7 +97,7 @@ export function SiteHeaderMenuLinks() {
           <Icons.gitHub className="size-4" />
           <span className="sr-only">GitHub</span>
         </div>
-      </Link>
+      </a>
     </>
   )
 }

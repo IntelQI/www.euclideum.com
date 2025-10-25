@@ -37,7 +37,7 @@ export default async function IndexPage({
   const t = await getTranslations()
 
   return (
-    <div className="container relative">
+    <div className="container relative ">
       <PageHeader>
         <Announcement title={t('site.announcement')} href="/docs" />
 
