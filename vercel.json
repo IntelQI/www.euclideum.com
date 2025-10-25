@@ -1,5 +1,4 @@
 {
-  "installCommand": "pnpm install",
-  "buildCommand": "pnpm run build --filter=opendocs-web",
-  "outputDirectory": "apps/web/.next"
+  "buildCommand": "cd ../.. && pnpm install && pnpm run build --filter=opendocs-web",
+  "outputDirectory": ".next"
 }
