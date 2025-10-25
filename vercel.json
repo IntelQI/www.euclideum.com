@@ -1,3 +1,4 @@
 {
-    "framework": "nextjs"
+  "buildCommand": "turbo run build --filter=opendocs-web",
+  "outputDirectory": "apps/web/.next"
 }
