@@ -1,4 +1,5 @@
 {
-  "buildCommand": "turbo run build --filter=opendocs-web",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm run build --filter=opendocs-web",
   "outputDirectory": "apps/web/.next"
 }
