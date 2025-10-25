@@ -1,5 +1,5 @@
 {
   "installCommand": "pnpm install",
-  "buildCommand": "pnpm run build --filter=opendocs-web",
+  "buildCommand": "pnpm run build --filter=euclideum-web",
   "outputDirectory": "apps/web/.next"
 }
