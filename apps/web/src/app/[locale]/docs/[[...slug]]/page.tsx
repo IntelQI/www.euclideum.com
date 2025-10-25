@@ -113,12 +113,14 @@ export default async function DocPage({ params }: DocPageProps) {
         />
 
         <DocHeading doc={doc} locale={params.locale} />
+        {/* @ts-ignore - Async Server Component */}
         <DocLinks doc={doc} />
 
         <div className="pb-12 pt-8">
           <Mdx code={doc.body.code} />
         </div>
 
+        {/* @ts-ignore - Async Server Component */}
         <DocsPager doc={doc} locale={params.locale} />
       </div>
 

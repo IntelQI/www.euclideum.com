@@ -4,7 +4,7 @@ import { badgeVariants } from '../ui/badge'
 import { Link } from '@/navigation'
 import { cn } from '@/lib/utils'
 
-export async function BlogPostTags({ post }: { post: Blog }) {
+export function BlogPostTags({ post }: { post: Blog }) {
   if (!post.tags) {
     return null
   }
