@@ -1,2 +1,6 @@
+# robots.txt for Euclideum Solutions Private Limited
 User-Agent: *
-Allow: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.euclideum.com/sitemap.xml

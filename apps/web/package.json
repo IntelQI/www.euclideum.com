@@ -1,7 +1,10 @@
 {
-  "name": "opendocs-web",
-  "version": "3.0.8",
+  "name": "euclideum-web",
+  "version": "1.0.0",
   "private": true,
+  "description": "Euclideum Solutions Private Limited - Official Website",
+  "author": "Euclideum Solutions Private Limited",
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "next dev",
     "build": "run-s contentlayer:build next:build",

@@ -4,11 +4,14 @@ import { siteConfig } from "@/config/site";
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
   return {
-    name: siteConfig.name,
+    name: siteConfig.company.name,
     short_name: siteConfig.name,
+    description: siteConfig.description,
     start_url: "/",
     theme_color: "#181423",
+    background_color: "#ffffff",
     display: "standalone",
+    orientation: "portrait",
 
     icons: [
       {

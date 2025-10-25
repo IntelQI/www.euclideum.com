@@ -17,32 +17,48 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: {
       default: siteConfig.name,
-      template: `%s - ${siteConfig.name}`,
+      template: `%s | ${siteConfig.company.name}`,
     },
 
     description: siteConfig.description,
 
     keywords: [
-      "Docs",
-      "Blog",
-      "React",
-      "shadcn",
-      "Next.js",
-      "Radix UI",
-      "Template",
-      "Tailwind CSS",
-      "Documentation",
-      "Server Components",
+      "euclideum",
+      "euclideum solutions",
+      "technology company",
+      "software development",
+      "cloud infrastructure",
+      "enterprise solutions",
+      "educational technology",
+      "edtech",
+      "IQ development",
+      "learning platforms",
+      "innovation",
+      "AI solutions",
+      "digital transformation",
     ],
 
     authors: [
       {
-        name: siteConfig.author.name,
-        url: siteConfig.author.site,
+        name: siteConfig.company.name,
+        url: siteConfig.url,
       },
     ],
 
-    creator: siteConfig.author.name,
+    creator: siteConfig.company.name,
+    publisher: siteConfig.company.name,
+    
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
 
     openGraph: {
       type: "website",
@@ -94,7 +110,7 @@ export default function RootLayout({ children }: AppLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#181423" />
+        <meta name="theme-color" content="#012b43" />
       </head>
 
       <body

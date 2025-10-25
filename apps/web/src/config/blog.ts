@@ -17,19 +17,19 @@ export const blogConfig: BlogConfig = {
         in contentlayer.config.ts so we can get the author details from the blogConfig by comparing the author_id
         with the id below
       */
-      id: "daltonmenezes",
-      name: "Dalton Menezes",
-      image: "/authors/daltonmenezes.jpg",
-      site: "https://daltonmenezes.com",
-      email: "daltonmenezes@outlook.com",
+      id: "euclideum-team",
+      name: "Euclideum Team",
+      image: "/authors/euclideum-team.jpg",
+      site: "https://www.euclideum.com",
+      email: "contact@euclideum.com",
 
-      bio: "Software Engineer | Writer | Designer",
+      bio: "Innovation powerhouse shaping the future across industries",
 
       social: {
-        github: "daltonmenezes",
-        twitter: "@daltonmenezes",
-        youtube: "daltonmenezes",
-        linkedin: "daltonmenezes",
+        github: "euclideum",
+        twitter: "@euclideum",
+        youtube: "euclideum",
+        linkedin: "euclideum-solutions",
       },
     },
   ],

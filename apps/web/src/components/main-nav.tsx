@@ -1,6 +1,7 @@
 "use client";
 
 import { Link, usePathname } from "@/navigation";
+import { ThemeLogo } from "@/components/theme-logo";
 import { Icons } from "@/components/icons";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -19,7 +20,7 @@ export function MainNav({ messages }: MainNavProps = {}) {
     <div className="hidden md:flex items-center">
       {/* Logo */}
       <a href="/" className="mr-4 lg:mr-8 flex items-center space-x-2">
-        <Icons.logo className="size-5 lg:size-6 text-white" />
+        <ThemeLogo className="size-5 lg:size-6" />
         <span className="text-white font-semibold text-base lg:text-lg">
           {siteConfig.name}
         </span>

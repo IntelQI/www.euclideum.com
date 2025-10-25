@@ -1,16 +1,16 @@
 import Link from "next/link";
 
 import { ThemeModeToggle } from "@/components/theme-mode-toggle";
-import { Icons } from "@/components/icons";
+import { ThemeLogo } from "@/components/theme-logo";
 import { siteConfig } from "@/config/site";
 
-export async function SiteHeader() {
+export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4 md:px-6">
+      <div className="container flex h-16 items-center justify-between">
         {/* Left: Logo */}
         <Link href="/" className="flex items-center space-x-2">
-          <Icons.logo className="size-6" />
+          <ThemeLogo className="size-6" />
           <span className="font-bold text-lg">{siteConfig.name}</span>
         </Link>
 

@@ -19,6 +19,7 @@ import { useDocsConfig } from "@/lib/opendocs/hooks/use-docs-config";
 import { DocsSidebarNav } from "./docs/sidebar-nav";
 import { ScrollArea } from "./ui/scroll-area";
 import { siteConfig } from "@/config/site";
+import { ThemeLogo } from "@/components/theme-logo";
 import { Icons } from "@/components/icons";
 import { MobileLink } from "./mobile-link";
 import { blogConfig } from "@/config/blog";
@@ -68,7 +69,7 @@ export function MobileNav({
           className="flex items-center"
           onOpenChange={setOpen}
         >
-          <Icons.logo className="mr-2 size-4" />
+          <ThemeLogo className="mr-2 size-4" />
           <span className="font-bold">{siteConfig.name}</span>
         </MobileLink>
 

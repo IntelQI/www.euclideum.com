@@ -1,6 +1,6 @@
 export default async function IndexPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
+    <div className="min-h-screen bg-background">
       {/* Blank canvas */}
     </div>
   );
