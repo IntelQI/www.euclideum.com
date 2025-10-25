@@ -1,10 +1,9 @@
 /**
  * This file contains the configuration for the documentation
  * to be used by files like:
- * - src/components/command-menu.tsx
  * - src/components/mobile-nav.tsx
- * - src/app/[locale]/docs/layout.tsx
- * - src/lib/opendocs/components/docs/pager.tsx
+ * - src/app/docs/layout.tsx
+ * - src/components/docs/pager.tsx
  */
 
 import type { DocsConfig } from "@/lib/opendocs/types/docs";
