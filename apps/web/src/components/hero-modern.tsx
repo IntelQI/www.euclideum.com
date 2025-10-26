@@ -10,7 +10,7 @@ import {
   Settings,
   Grid,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 
 import { cn } from "@/lib/utils";
@@ -85,23 +85,31 @@ const HeroModern = ({
   tabs = defaultTabs,
 }: HeroModernProps) => {
   const [activeTab, setActiveTab] = useState(tabs[0]?.title || "");
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
 
-  console.log(theme);
+  // Use resolvedTheme when available (ensures stored preference is applied on mount)
+  const [isDark,setIsDark]=useState(false);
+
+  
+  useEffect(()=>{
+    if(theme=="dark"){
+      setIsDark(true);
+    }else{setIsDark(false)}
+    
+  },[theme,resolvedTheme])
+
 
   return (
     <section
       className={cn(
-  "min-h-screen overflow-hidden relative",
-  theme === "dark"
-    ? "hero-dark-bg"
-    : "bg-gradient-to-b from-[#F7F7F9] to-[#FFFFFF]"
-)}
+        "min-h-screen overflow-hidden relative",
+        isDark ? "hero-dark-bg" : "bg-gradient-to-b from-[#F7F7F9] to-[#FFFFFF]",
+      )}
     >
       <div className="container mx-auto px-4">
-        <div className="py-20 lg:py-32">
+        <div className="py-20 lg:py-15">
           {/* Hero Content - Split Layout */}
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[7fr_3fr] lg:items-start">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[6.5fr_3.5fr] lg:items-start">
             {/* Left Section - Headline */}
             <div className="flex flex-col space-y-1">
               {/* NEW Feature Badge */}
@@ -109,15 +117,13 @@ const HeroModern = ({
                 <div
                   className={cn(
                     "inline-flex items-center gap-3 rounded-xl border px-4 py-5 bg-transparent",
-                    theme === "dark" ? "border-gray-700" : "border-[#ECEEF1]",
+                    isDark ? "border-gray-700" : "border-[#ECEEF1]",
                   )}
                 >
                   <span
                     className={cn(
                       "rounded-full px-3 py-0.5 text-xs font-bold uppercase",
-                      theme === "dark"
-                        ? "bg-gray-800 text-[#00ED64]"
-                        : "bg-[#00ED64] text-[#001E2B]",
+                      isDark ? "bg-gray-800 text-[#00ED64]" : "bg-[#00ED64] text-[#001E2B]",
                     )}
                   >
                     NEW
@@ -125,7 +131,7 @@ const HeroModern = ({
                   <span
                     className={cn(
                       "text-sm",
-                      theme === "dark" ? "text-white" : "text-[#0E1116]",
+                      isDark ? "text-white" : "text-[#0E1116]",
                     )}
                   >
                     Modernize 2-3x faster with MongoDB's Application
@@ -137,13 +143,13 @@ const HeroModern = ({
               <h1
                 className={cn(
                   "text-5xl font-normal leading-relaxed tracking-tight md:text-6xl lg:text-7xl md:leading-relaxed lg:leading-relaxed",
-                  theme === "dark" ? "text-white" : "text-[#0E1116]",
+                  isDark ? "text-white" : "text-[#0E1116]",
                 )}
               >
                 Get tips on setting up your{" "}
                 <span
                   className={cn(
-                    "relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:rounded-full",
+                    "relative inline-block after:absolute after:bottom-3 after:left-0 after:h-0.5 after:w-full after:rounded-full",
                     theme === "dark"
                       ? "after:bg-[#00ED64]"
                       : "after:bg-[#00ED64]",
@@ -159,7 +165,7 @@ const HeroModern = ({
               <p
                 className={cn(
                   "text-lg leading-relaxed md:text-xl",
-                  theme === "dark" ? "text-white/80" : "text-[#3A4048]",
+                  isDark ? "text-white/80" : "text-[#3A4048]",
                 )}
               >
                 {description}
@@ -168,10 +174,8 @@ const HeroModern = ({
                 <Button
                   asChild
                   className={cn(
-                    "h-12 rounded-lg px-6 text-base font-medium transition-all",
-                    theme === "dark"
-                      ? "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A] hover:brightness-110"
-                      : "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A]",
+                    "h-12 rounded-md px-6 w-[100%] text-base font-medium transition-all",
+                    isDark ? "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A] hover:brightness-110" : "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A]",
                   )}
                 >
                   <a href={primaryButtonUrl}>{primaryButtonText}</a>
@@ -181,10 +185,8 @@ const HeroModern = ({
                     variant="outline"
                     asChild
                     className={cn(
-                      "h-12 rounded-lg border-2 px-6 text-base font-medium transition-all",
-                      theme === "dark"
-                        ? "border-white text-white hover:bg-white/10"
-                        : "border-[#0E1116] text-[#0E1116] hover:bg-[#0E1116]/10",
+                      "h-12 rounded-md border-2 px-6 w-[100%] text-base font-medium transition-all",
+                      isDark ? "border-white text-white hover:bg-white/10" : "border-[#0E1116] text-[#0E1116] hover:bg-[#0E1116]/10",
                     )}
                   >
                     <a href={secondaryButtonUrl}>{secondaryButtonText}</a>
@@ -195,17 +197,17 @@ const HeroModern = ({
           </div>
 
           {/* Tabs Section */}
-          <div className="mt-16 md:mt-24 lg:mt-32">
+          <div className="mt-16 md:mt-24 lg:mt-10">
             <Tabs defaultValue={tabs[0]?.title} onValueChange={setActiveTab}>
               <div className="mb-12 px-2 flex justify-center">
-                <TabsList className="mx-auto inline-flex h-auto w-fit max-w-md flex-wrap gap-2 rounded-xl border-2 bg-transparent p-2 lg:max-w-4xl">
+                <TabsList className="mx-auto inline-flex h-auto w-fit max-w-md flex-wrap gap-1 rounded-lg border-2 bg-transparent p-1 lg:max-w-4xl">
                   {tabs.map((tab) => (
                     <TabsTrigger
                       key={tab.title}
                       value={tab.title}
                       className={cn(
-                        "h-12 rounded-lg px-6 font-medium transition-all",
-                        theme === "dark"
+                        "h-9 rounded-md px-4 text-sm font-medium transition-all",
+                        isDark
                           ? "text-[#D1D5DB] data-[state=active]:bg-[#00ED64] data-[state=active]:text-[#001E2B]"
                           : "text-[#3A4048] data-[state=active]:bg-[#0B3C5D] data-[state=active]:text-white",
                       )}
@@ -248,17 +250,13 @@ const HeroModern = ({
                           <div
                             className={cn(
                               "absolute bottom-0 left-0 right-0 bg-gradient-to-t p-6",
-                              theme === "dark"
-                                ? "from-[#001E2B]"
-                                : "from-white/95",
+                              isDark ? "from-[#001E2B]" : "from-white/95",
                             )}
                           >
                             <p
                               className={cn(
                                 "text-sm font-medium",
-                                theme === "dark"
-                                  ? "text-white"
-                                  : "text-[#0E1116]",
+                                isDark ? "text-white" : "text-[#0E1116]",
                               )}
                             >
                               {tab.description}
@@ -274,7 +272,7 @@ const HeroModern = ({
                 <span
                   className={cn(
                     "absolute inset-x-0 top-0 -z-10 h-px",
-                    theme === "dark" ? "bg-white/20" : "bg-[#C8CDD3]",
+                    isDark ? "bg-white/20" : "bg-[#C8CDD3]",
                   )}
                   style={{
                     maskImage:
@@ -284,7 +282,7 @@ const HeroModern = ({
                 <span
                   className={cn(
                     "absolute inset-x-0 bottom-0 -z-10 h-px",
-                    theme === "dark" ? "bg-white/20" : "bg-[#C8CDD3]",
+                    isDark ? "bg-white/20" : "bg-[#C8CDD3]",
                   )}
                   style={{
                     maskImage:
