@@ -69,6 +69,15 @@ const config = {
         },
       },
 
+      height: {
+        '105': '26.25rem',
+        '140': '35rem',
+      },
+
+      translate: {
+        '34': '8.5rem',
+      },
+
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
