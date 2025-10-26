@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { ThemeLogo } from "@/components/theme-logo";
+import { CTASection } from "@/components/cta-section";
 import { siteConfig } from "@/config/site";
 
 type linkType = "DROPDOWN" | "LINK" | "EXTERNAL_LINK";
@@ -312,8 +313,10 @@ export function SiteFooter() {
   };
 
   return (
-    <section className="py-10 bg-background">
-      <footer className="container">
+    <>
+      <CTASection />
+      <section className="py-10 bg-background">
+        <footer className="container">
         <div className="flex w-full flex-col gap-6">
           <div className="grid w-full grid-cols-[repeat(2,minmax(auto,15rem))] gap-8 md:grid-cols-[repeat(4,1fr)_5rem] md:gap-0">
             {NAVIGATION.map((section) => (
@@ -418,5 +421,6 @@ export function SiteFooter() {
         </div>
       </footer>
     </section>
+    </>
   );
 }
