@@ -99,12 +99,12 @@ export function CTASection() {
             Impact
           </span>
         </h1>
-        <p className="max-w-2xl text-center text-lg md:text-xl text-muted-foreground/80 mt-4">
+        <p className="max-w-2xl text-center text-lg md:text-xl text-muted-foreground/80 mt-2">
           Learn how our expertise can unlock new opportunities and drive your organization's success
         </p>
         <Button
           variant="secondary"
-          className="group relative z-10 mt-8 flex w-fit items-center justify-center gap-2 rounded-md px-8 py-6 tracking-tight text-lg font-medium"
+          className="group relative z-10 mt-4 flex w-fit items-center justify-center gap-2 rounded-md px-8 py-6 tracking-tight text-lg font-medium bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/80"
         >
           Book an Appointment
           <ArrowRight className="size-5 -rotate-45 transition-all ease-out group-hover:ml-3 group-hover:rotate-0" />
@@ -118,19 +118,15 @@ export function CTASection() {
         
         {/* Ultra-smooth gradient blend at globe/footer intersection */}
         <div 
-          className="absolute bottom-0 left-0 right-0 h-96 pointer-events-none z-20"
+          className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none z-20"
           style={{
             background: `linear-gradient(to top, 
               hsl(var(--background)) 0%, 
-              hsl(var(--background) / 0.98) 10%,
-              hsl(var(--background) / 0.95) 20%,
-              hsl(var(--background) / 0.9) 30%,
-              hsl(var(--background) / 0.82) 40%,
-              hsl(var(--background) / 0.7) 50%,
-              hsl(var(--background) / 0.55) 60%,
-              hsl(var(--background) / 0.38) 70%,
-              hsl(var(--background) / 0.22) 80%,
-              hsl(var(--background) / 0.1) 90%,
+              hsl(var(--background) / 0.95) 15%,
+              hsl(var(--background) / 0.85) 30%,
+              hsl(var(--background) / 0.65) 50%,
+              hsl(var(--background) / 0.4) 70%,
+              hsl(var(--background) / 0.15) 85%,
               transparent 100%
             )`
           }}
