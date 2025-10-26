@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface ThemeLogoProps {
   className?: string;
@@ -10,47 +9,41 @@ interface ThemeLogoProps {
   height?: number;
 }
 
-export function ThemeLogo({ className, width = 15, height = 15 }: ThemeLogoProps) {
-  const { theme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // Prevent hydration mismatch by only rendering after mount
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    // Return a placeholder during SSR to prevent hydration mismatch
-    return (
-      <div 
-        className={className}
-        style={{ width, height }}
-        aria-label="Euclideum Logo"
-      />
-    );
-  }
-
-  // Use resolvedTheme to handle system theme preference
-  const currentTheme = resolvedTheme || theme;
-  const logoSrc = currentTheme === "dark" ? "/logo_dark.svg" : "/logo_light.svg";
-
-  // Calculate aspect ratio: original SVG is 311x504, so ratio is ~0.617
-  const aspectRatio = 311 / 504;
-  const calculatedHeight = width / aspectRatio;
+export function ThemeLogo({ className, width = 20, height }: ThemeLogoProps) {
+  // Original SVG dimensions: 311x504 (vertically rectangular)
+  const aspectRatio = 311 / 504; // width/height = ~0.617
+  const calculatedHeight = height || width / aspectRatio;
 
   return (
-    <Image
-      src={logoSrc}
-      alt="Euclideum Logo"
-      width={width}
-      height={calculatedHeight}
-      className={className}
-      style={{ 
-        width: `${width}px`, 
-        height: `${calculatedHeight}px`,
-        objectFit: 'contain'
-      }}
-      priority
-    />
+    <>
+      {/* Light theme logo */}
+      <Image
+        src="/logo_light.svg"
+        alt="Euclideum Logo"
+        width={width}
+        height={calculatedHeight}
+        className={cn(className, "dark:hidden")}
+        style={{
+          width: `${width}px`,
+          height: 'auto',
+          maxHeight: `${calculatedHeight}px`
+        }}
+        priority
+      />
+      {/* Dark theme logo */}
+      <Image
+        src="/logo_dark.svg"
+        alt="Euclideum Logo"
+        width={width}
+        height={calculatedHeight}
+        className={cn(className, "hidden dark:block")}
+        style={{
+          width: `${width}px`,
+          height: 'auto',
+          maxHeight: `${calculatedHeight}px`
+        }}
+        priority
+      />
+    </>
   );
 }
