@@ -119,18 +119,6 @@ Copyright © 2025 Euclideum Solutions Private Limited. All rights reserved.
 
 This is proprietary software. Unauthorized copying, modification, distribution, or use of this software, via any medium, is strictly prohibited.
 
-## 📞 Contact
-
-- **Website**: [www.euclideum.com](https://www.euclideum.com)
-- **Email**: contact@euclideum.com
-- **Twitter**: [@euclideum](https://twitter.com/euclideum)
-- **LinkedIn**: [Euclideum Solutions](https://linkedin.com/company/euclideum-solutions)
-- **GitHub**: [github.com/euclideum](https://github.com/euclideum)
-
-## 🤝 Support
-
-For technical support or inquiries, please contact our support team at contact@euclideum.com.
-
 ---
 
 **Built with ❤️ by Euclideum Solutions Private Limited**
