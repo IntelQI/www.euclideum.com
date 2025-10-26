@@ -231,21 +231,24 @@ const productCategories = [
         title: "Task Management",
         description: "Organize and track work efficiently.",
         href: "#",
-        image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-1.svg",
+        image:
+          "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-1.svg",
       },
       {
         id: "product-2",
         title: "Team Calendar",
         description: "Coordinate schedules and deadlines.",
         href: "#",
-        image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-2.svg",
+        image:
+          "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-2.svg",
       },
       {
         id: "product-3",
         title: "Workflows",
         description: "Automate your business processes.",
         href: "#",
-        image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-3.svg",
+        image:
+          "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-3.svg",
       },
     ],
   },
@@ -257,14 +260,16 @@ const productCategories = [
         title: "Portfolio Management",
         description: "Track and optimize project portfolios at scale.",
         href: "#",
-        image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-4.svg",
+        image:
+          "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-4.svg",
       },
       {
         id: "product-5",
         title: "Resource Planning",
         description: "Optimize team workload and capacity.",
         href: "#",
-        image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-5.svg",
+        image:
+          "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-5.svg",
       },
     ],
   },
@@ -1036,40 +1041,35 @@ export function Navbar() {
   return (
     <section className="bg-background inset-x-0 top-0 z-20">
       <div className="container">
-        <NavigationMenu 
-          className="min-w-full [&>div:last-child]:left-auto" 
+        <NavigationMenu
+          className="min-w-full [&>div:last-child]:left-auto"
           value={activeItem || undefined}
         >
           <div className="flex w-full justify-between gap-2 py-4">
-            <Link
-              href="/"
-              className="flex items-center gap-2"
-            >
+            <Link href="/" className="flex items-center gap-2">
               <ThemeLogo width={20} />
               <span className="text-lg font-semibold tracking-tighter">
                 {siteConfig.name}
               </span>
             </Link>
             <div className="flex items-center gap-2 xl:gap-8">
-              <NavigationMenuList 
+              <NavigationMenuList
                 className="hidden gap-0 lg:flex"
                 onMouseLeave={() => setActiveItem(null)}
               >
                 {navigationMenuItems.map((item) => (
-                  <NavigationMenuItem 
-                    key={item.key} 
+                  <NavigationMenuItem
+                    key={item.key}
                     value={item.key}
                     onMouseEnter={() => setActiveItem(item.key)}
                   >
-                    <NavigationMenuTrigger 
+                    <NavigationMenuTrigger
                       className="text-xs xl:text-sm"
                       onPointerDown={(e) => e.preventDefault()}
                     >
                       {item.label}
                     </NavigationMenuTrigger>
-                    <NavigationMenuContent 
-                      className="min-w-[calc(100vw-4rem)] p-12 2xl:min-w-[calc(1400px-4rem)]"
-                    >
+                    <NavigationMenuContent className="min-w-[calc(100vw-4rem)] p-12 2xl:min-w-[calc(1400px-4rem)]">
                       <item.component />
                     </NavigationMenuContent>
                   </NavigationMenuItem>
@@ -1155,4 +1155,3 @@ export function Navbar() {
     </section>
   );
 }
-

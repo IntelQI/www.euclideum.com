@@ -28,6 +28,50 @@
     --radius: 0.5rem;
   }
 
+  .hero-dark-bg {
+    /* Base blue-gray canvas using your palette */
+    background-color: #001b29; /* neutral900 */
+    background-image:
+      /* Primary teal glow (derived from #00ED64, softened toward teal) */ radial-gradient(
+        100vw 55vw at 60% 15%,
+        #2a4149,
+        transparent 50%
+      ),
+      linear-gradient(180deg, #0b0f139c 0%, #001e2b 100%);
+    background-blend-mode: normal;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* faint technical grid overlay */
+  .hero-dark-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  /* accessible text styling */
+  .hero-dark-bg .content {
+    color: #ffffff; /* textPrimary */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-dark-bg {
+      transition: background 300ms cubic-bezier(0.2, 0, 0, 1);
+    }
+  }
+
   .dark {
     --background: 201 100% 8%;
     --foreground: 0 0% 98%;
@@ -78,6 +122,16 @@
     @apply absolute w-9 h-9 bg-muted rounded-full font-mono font-medium text-center text-base inline-flex items-center justify-center -indent-px border-4 border-background;
     @apply ml-[-50px] mt-[-4px];
     content: counter(step);
+  }
+
+  @keyframes border-beam {
+    100% {
+      offset-distance: 100%;
+    }
+  }
+
+  .animate-border-beam {
+    animation: border-beam calc(var(--duration) * 1s) infinite linear;
   }
 }
 

@@ -1,7 +1,16 @@
-export default async function IndexPage() {
+"use client";
+
+import { HeroModern } from "@/components/hero-modern";
+
+export default function IndexPage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Blank canvas */}
-    </div>
+    <HeroModern
+      title="The database for dynamic, demanding software"
+      description="Start exploring the powerful capabilities of the leading modern database by creating a cluster in just three minutes."
+      primaryButtonText="Get Started"
+      secondaryButtonText="Documentation"
+      primaryButtonUrl="#"
+      secondaryButtonUrl="#"
+    />
   );
 }

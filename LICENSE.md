@@ -9,6 +9,7 @@ This software and associated documentation files (the "Software") are proprietar
 ### Restrictions
 
 You may NOT:
+
 - Copy, modify, merge, publish, distribute, sublicense, or sell copies of the Software
 - Use the Software for any purpose without explicit written permission from Euclideum Solutions Private Limited
 - Reverse engineer, decompile, or disassemble the Software

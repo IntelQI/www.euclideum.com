@@ -13,11 +13,13 @@ Euclideum Solutions Private Limited is a global technology and innovation powerh
 ## 🚀 Our Solutions
 
 ### Technology & Infrastructure
+
 - **Software Development**: Custom enterprise software solutions
 - **Cloud Infrastructure**: Scalable cloud services and infrastructure
 - **Enterprise Solutions**: End-to-end business technology solutions
 
 ### Education & Learning
+
 - **Educational Platforms**: Advanced learning management systems
 - **IQ Development Tools**: Cognitive enhancement platforms
 - **Next-Gen Learning**: Products designed to nurture genius minds
@@ -101,6 +103,7 @@ Create documentation in `apps/content/docs/en/` directory following the same MDX
 ### Site Configuration
 
 Edit `apps/web/src/config/site.ts` to update:
+
 - Company information
 - Social media links
 - SEO metadata
@@ -131,4 +134,3 @@ For technical support or inquiries, please contact our support team at contact@e
 ---
 
 **Built with ❤️ by Euclideum Solutions Private Limited**
-

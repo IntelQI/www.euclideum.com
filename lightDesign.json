@@ -1,0 +1,352 @@
+{
+  "$schema": "https://design-tokens.org/schema.json",
+  "meta": {
+    "name": "Euclideum-Profile",
+    "version": "1.0.0",
+    "description": "Design profile for a clean B2B SaaS marketing site with top nav, multi-column footer, and consistent tokenized theming.",
+    "theming": ["light", "dark"],
+    "density": ["comfortable", "compact"],
+    "a11y": { "minContrast": "WCAG AA", "focusVisible": true }
+  },
+  "foundations": {
+    "color": {
+      "primitive": {
+        "neutral-0": { "$value": "#FFFFFF" },
+        "neutral-50": { "$value": "#F7F7F9" },
+        "neutral-100": { "$value": "#ECEEF1" },
+        "neutral-300": { "$value": "#C8CDD3" },
+        "neutral-600": { "$value": "#3A4048" },
+        "neutral-900": { "$value": "#0E1116" },
+        "brand-50": { "$value": "#E8F1F7" },
+        "brand-500": { "$value": "#0B3C5D" },
+        "brand-600": { "$value": "#072F49" },
+        "accent-500": { "$value": "#2AA198" }
+      },
+      "semantic": {
+        "bg-surface": {
+          "$value": {
+            "light": "{color.primitive.neutral-0}",
+            "dark": "{color.primitive.neutral-900}"
+          }
+        },
+        "bg-subtle": {
+          "$value": {
+            "light": "{color.primitive.neutral-50}",
+            "dark": "{color.primitive.neutral-600}"
+          }
+        },
+        "text-primary": {
+          "$value": {
+            "light": "{color.primitive.neutral-900}",
+            "dark": "{color.primitive.neutral-0}"
+          }
+        },
+        "text-secondary": {
+          "$value": {
+            "light": "{color.primitive.neutral-600}",
+            "dark": "{color.primitive.neutral-300}"
+          }
+        },
+        "brand": {
+          "$value": {
+            "light": "{color.primitive.brand-500}",
+            "dark": "{color.primitive.brand-50}"
+          }
+        },
+        "link": {
+          "$value": {
+            "light": "{color.primitive.brand-500}",
+            "dark": "{color.primitive.brand-50}"
+          }
+        },
+        "border-subtle": {
+          "$value": {
+            "light": "{color.primitive.neutral-100}",
+            "dark": "{color.primitive.neutral-600}"
+          }
+        },
+        "button-primary-bg": {
+          "$value": {
+            "light": "{color.primitive.brand-600}",
+            "dark": "{color.primitive.brand-50}"
+          }
+        },
+        "button-primary-text": {
+          "$value": {
+            "light": "{color.primitive.neutral-0}",
+            "dark": "{color.primitive.brand-600}"
+          }
+        }
+      }
+    },
+    "typography": {
+      "fontFamily-base": {
+        "$value": "'Inter', 'Helvetica Neue', Arial, sans-serif"
+      },
+      "fontFamily-mono": { "$value": "'JetBrains Mono', monospace" },
+      "scale": {
+        "xs": { "$value": "12px" },
+        "sm": { "$value": "14px" },
+        "md": { "$value": "16px" },
+        "lg": { "$value": "18px" },
+        "xl": { "$value": "20px" },
+        "2xl": { "$value": "24px" }
+      },
+      "weight": {
+        "regular": { "$value": "400" },
+        "medium": { "$value": "500" },
+        "semibold": { "$value": "600" }
+      },
+      "lineHeight": {
+        "tight": { "$value": "1.2" },
+        "normal": { "$value": "1.5" }
+      }
+    },
+    "space": {
+      "scale": {
+        "0": { "$value": "0px" },
+        "1": { "$value": "4px" },
+        "2": { "$value": "8px" },
+        "3": { "$value": "12px" },
+        "4": { "$value": "16px" },
+        "6": { "$value": "24px" },
+        "8": { "$value": "32px" }
+      },
+      "container-padding": {
+        "$value": { "comfortable": "24px", "compact": "16px" }
+      }
+    },
+    "radius": {
+      "sm": { "$value": "6px" },
+      "md": { "$value": "10px" },
+      "pill": { "$value": "999px" }
+    },
+    "shadow": {
+      "sm": { "$value": "0 1px 2px rgba(0,0,0,0.05)" },
+      "md": { "$value": "0 2px 8px rgba(0,0,0,0.08)" }
+    },
+    "motion": {
+      "duration": {
+        "fast": { "$value": { "default": "150ms", "disabled": "0ms" } },
+        "base": { "$value": { "default": "250ms", "disabled": "0ms" } }
+      },
+      "easing": {
+        "standard": { "$value": "cubic-bezier(0.2, 0, 0, 1)" }
+      }
+    },
+    "layout": {
+      "grid-maxWidth": { "$value": "1200px" },
+      "grid-columnGap": { "$value": "24px" }
+    }
+  },
+  "icons": {
+    "style": "stroke-rounded",
+    "strokeWidth": "1.5px",
+    "size": { "sm": "16px", "md": "20px", "lg": "24px" }
+  },
+  "components": {
+    "topNav": {
+      "layout": {
+        "height": "64px",
+        "maxWidth": "{foundations.layout.grid-maxWidth}",
+        "containerPadding": "{foundations.space.container-padding}"
+      },
+      "branding": {
+        "logoPlacement": "left",
+        "wordmarkVisible": true
+      },
+      "menus": [
+        {
+          "labelStyle": {
+            "case": "title",
+            "weight": "{foundations.typography.weight.medium}"
+          }
+        },
+        { "hasDropdown": true, "indicator": "chevron-down" }
+      ],
+      "actions": {
+        "themeToggle": { "icon": "sun-moon", "position": "right" },
+        "auth": { "type": "button", "label": "Login", "variant": "primary" }
+      },
+      "tokens": {
+        "bg": "{foundations.color.semantic.bg-surface}",
+        "text": "{foundations.color.semantic.text-primary}",
+        "link": "{foundations.color.semantic.link}",
+        "hover-underline": true,
+        "divider": "{foundations.color.semantic.border-subtle}"
+      },
+      "states": {
+        "scroll": { "elevation": "{foundations.shadow.sm}", "bgBlur": "8px" },
+        "focusRing": {
+          "outline": "2px solid {foundations.color.semantic.brand}"
+        }
+      }
+    },
+    "footer": {
+      "layout": {
+        "columns": 3,
+        "columnGutter": "{foundations.layout.grid-columnGap}",
+        "sectionOrder": ["Products", "Company", "Resources"],
+        "socialRow": true,
+        "legalRow": true
+      },
+      "tokens": {
+        "bg": "{foundations.color.semantic.bg-subtle}",
+        "headingColor": "{foundations.color.semantic.text-primary}",
+        "linkColor": "{foundations.color.semantic.text-secondary}",
+        "linkHoverColor": "{foundations.color.semantic.link}",
+        "borderTop": "{foundations.color.semantic.border-subtle}"
+      },
+      "typography": {
+        "headingSize": "{foundations.typography.scale.sm}",
+        "linkSize": "{foundations.typography.scale.sm}"
+      },
+      "legal": {
+        "copyrightPrefix": "©",
+        "links": ["Privacy Policy", "Terms of Service"]
+      }
+    },
+    "button": {
+      "variants": {
+        "primary": {
+          "bg": "{foundations.color.semantic.button-primary-bg}",
+          "text": "{foundations.color.semantic.button-primary-text}",
+          "radius": "{foundations.radius.md}",
+          "paddingX": "{foundations.space.scale.4}",
+          "paddingY": "{foundations.space.scale.2}",
+          "focusRing": "0 0 0 3px color-mix(in oklab, {foundations.color.semantic.brand} 40%, transparent)"
+        },
+        "ghost": {
+          "bg": "transparent",
+          "text": "{foundations.color.semantic.text-primary}",
+          "border": "1px solid {foundations.color.semantic.border-subtle}"
+        }
+      },
+      "sizes": {
+        "sm": {
+          "fontSize": "{foundations.typography.scale.sm}",
+          "height": "32px"
+        },
+        "md": {
+          "fontSize": "{foundations.typography.scale.md}",
+          "height": "40px"
+        }
+      },
+      "states": {
+        "hover": { "elevation": "{foundations.shadow.sm}" },
+        "active": { "transform": "translateY(1px)" },
+        "disabled": { "opacity": 0.5 }
+      }
+    },
+    "link": {
+      "style": {
+        "color": "{foundations.color.semantic.link}",
+        "underline": "on-hover",
+        "focusOutline": "2px solid {foundations.color.semantic.brand}"
+      }
+    },
+    "sectionHeading": {
+      "style": {
+        "fontSize": "{foundations.typography.scale.lg}",
+        "weight": "{foundations.typography.weight.semibold}",
+        "marginBottom": "{foundations.space.scale.3}"
+      }
+    },
+    "listNav": {
+      "style": {
+        "itemSpacing": "{foundations.space.scale.2}",
+        "icon": {
+          "size": "{icons.size.sm}",
+          "color": "{foundations.color.semantic.text-secondary}"
+        }
+      }
+    },
+    "socialRow": {
+      "icons": ["x", "linkedin", "github"],
+      "spacing": "{foundations.space.scale.3}",
+      "size": "{icons.size.lg}"
+    },
+    "badge": {
+      "style": {
+        "bg": "{foundations.color.semantic.bg-subtle}",
+        "text": "{foundations.color.semantic.text-secondary}",
+        "radius": "{foundations.radius.pill}",
+        "paddingX": "{foundations.space.scale.2}",
+        "paddingY": "{foundations.space.scale.1}"
+      }
+    }
+  },
+  "patterns": {
+    "shells": {
+      "marketingHeader": {
+        "slots": ["brand", "primaryNav", "utilityActions"],
+        "behavior": { "sticky": true, "elevateOnScroll": true }
+      },
+      "marketingFooter": {
+        "slots": ["categoryColumns", "socialRow", "legalRow"],
+        "grid": { "columnsDesktop": 3, "columnsMobile": 1 }
+      }
+    },
+    "content": {
+      "container": {
+        "maxWidth": "{foundations.layout.grid-maxWidth}",
+        "paddingX": "{foundations.space.container-padding}"
+      }
+    }
+  },
+  "states": {
+    "focus": { "outline": "2px solid {foundations.color.semantic.brand}" },
+    "hover": {
+      "transition": "{foundations.motion.duration.base} {foundations.motion.easing.standard}"
+    }
+  },
+  "themes": {
+    "light": {
+      "name": "Light",
+      "overrides": {}
+    },
+    "dark": {
+      "name": "Dark",
+      "overrides": {
+        "components.topNav.tokens.bg": "{foundations.color.semantic.bg-surface}",
+        "components.footer.tokens.bg": "{foundations.color.semantic.bg-surface}"
+      }
+    }
+  },
+  "export": {
+    "cssVariables": true,
+    "styleDictionary": { "enabled": true, "prefix": "euc" },
+    "platforms": ["web", "react", "next"]
+  },
+  "usage": {
+    "mappingExamples": {
+      "css": {
+        "varPrefix": "--euc",
+        "samples": [
+          {
+            "token": "foundations.color.semantic.text-primary",
+            "css": "color: var(--euc-foundations-color-semantic-text-primary);"
+          },
+          {
+            "token": "components.button.variants.primary.bg",
+            "css": "background: var(--euc-components-button-variants-primary-bg);"
+          }
+        ]
+      },
+      "react": {
+        "props": [
+          {
+            "component": "Button",
+            "prop": "variant",
+            "values": ["primary", "ghost"]
+          },
+          {
+            "component": "TopNav",
+            "prop": "density",
+            "values": ["comfortable", "compact"]
+          }
+        ]
+      }
+    }
+  }
+}

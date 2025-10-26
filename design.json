@@ -1,0 +1,143 @@
+{
+  "designSystemProfile": {
+    "name": "ModernTechGrid",
+    "overallStyle": {
+      "theme": "modern-minimalist",
+      "primaryTone": "dark",
+      "accentTone": "vibrant-green",
+      "visualMood": "tech-oriented, futuristic, professional",
+      "gridSystem": "12-column responsive grid",
+      "spacingScale": [4, 8, 12, 16, 24, 32, 48, 64],
+      "cornerRadius": "rounded-xl",
+      "shadows": {
+        "cards": "0px 4px 12px rgba(0,0,0,0.1)",
+        "hover": "0px 6px 20px rgba(0,0,0,0.15)"
+      }
+    },
+    "typography": {
+      "primaryFont": "Serif-like display (e.g., Georgia, Charter, or Inter Display)",
+      "secondaryFont": "Sans-serif UI (e.g., Inter, Helvetica, or DM Sans)",
+      "fontWeights": {
+        "heading": 600,
+        "body": 400,
+        "button": 500
+      },
+      "sizes": {
+        "display": "64px",
+        "h1": "48px",
+        "h2": "36px",
+        "h3": "24px",
+        "body": "16px",
+        "small": "14px"
+      },
+      "letterSpacing": "slight-tight",
+      "lineHeight": 1.4
+    },
+    "colorPalette": {
+      "primary": "#00ED64",
+      "backgroundDark": "#001E2B",
+      "backgroundLight": "#F9FAFB",
+      "textPrimary": "#FFFFFF",
+      "textSecondary": "#D1D5DB",
+      "neutral100": "#FFFFFF",
+      "neutral900": "#0B0F13",
+      "buttonHover": "#00C85A"
+    },
+    "components": {
+      "heroSection": {
+        "layout": "split",
+        "leftContent": "large headline + supporting text",
+        "rightContent": "interactive buttons or call-to-action",
+        "background": "dark gradient grid texture",
+        "ctaButtons": {
+          "primary": {
+            "color": "vibrant-green",
+            "shape": "rounded-lg",
+            "size": "medium",
+            "hoverEffect": "brightness(1.1)"
+          },
+          "secondary": {
+            "outline": true,
+            "borderColor": "#FFFFFF",
+            "textColor": "#FFFFFF"
+          }
+        }
+      },
+      "partnerShowcase": {
+        "titleStyle": "bold, large, simple heading",
+        "subtitle": "short descriptive line",
+        "layout": "responsive horizontal card grid",
+        "cards": {
+          "background": "#F5F6F7",
+          "borderRadius": "xl",
+          "shadow": "light",
+          "hoverEffect": "translateY(-2px) scale(1.02)"
+        }
+      },
+      "contentBlocks": {
+        "layoutType": "two-column or side-panel layout",
+        "primaryPanel": {
+          "background": "#081C24",
+          "accentElements": "neon green highlights and illustrations"
+        },
+        "secondaryPanel": {
+          "background": "#FFFFFF",
+          "content": "list of navigational links with subtle dividers"
+        }
+      },
+      "buttons": {
+        "primary": {
+          "backgroundColor": "#00ED64",
+          "textColor": "#001E2B",
+          "hover": "#00C85A",
+          "borderRadius": "lg",
+          "padding": "12px 20px"
+        },
+        "secondary": {
+          "border": "1px solid #FFFFFF",
+          "textColor": "#FFFFFF",
+          "background": "transparent",
+          "hoverBackground": "rgba(255,255,255,0.1)"
+        }
+      },
+      "cards": {
+        "base": {
+          "background": "#F9FAFB",
+          "borderRadius": "xl",
+          "shadow": "small",
+          "padding": "24px"
+        },
+        "iconCards": {
+          "alignment": "centered",
+          "spacing": "large"
+        }
+      }
+    },
+    "illustrationStyle": {
+      "theme": "flat minimal with geometric layering",
+      "colorUsage": {
+        "primary": "yellow",
+        "secondary": "green",
+        "background": "dark navy or teal"
+      },
+      "shapes": "rounded, modular, slightly 3D with shadows",
+      "lineStyle": "clean and thick outlines"
+    },
+    "interactionAndMotion": {
+      "hoverEffects": "subtle lift or glow",
+      "transitions": "ease-in-out 200ms",
+      "focusStates": "accent border glow in green"
+    },
+    "layoutPatterns": {
+      "sectionSpacing": "96px vertical gap",
+      "alignment": "centered or left-aligned grid",
+      "maxContentWidth": "1200px",
+      "visualHierarchy": ["Hero → Partners → Path Choice / CTA → Resources"]
+    },
+    "accessibility": {
+      "contrastRatio": "AA+ minimum",
+      "focusOutlineColor": "#00ED64",
+      "fontScalability": "responsive rem units"
+    }
+  }
+}

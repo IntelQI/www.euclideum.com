@@ -25,8 +25,8 @@ export function ThemeLogo({ className, width = 20, height }: ThemeLogoProps) {
         className={cn(className, "dark:hidden")}
         style={{
           width: `${width}px`,
-          height: 'auto',
-          maxHeight: `${calculatedHeight}px`
+          height: "auto",
+          maxHeight: `${calculatedHeight}px`,
         }}
         priority
       />
@@ -39,8 +39,8 @@ export function ThemeLogo({ className, width = 20, height }: ThemeLogoProps) {
         className={cn(className, "hidden dark:block")}
         style={{
           width: `${width}px`,
-          height: 'auto',
-          maxHeight: `${calculatedHeight}px`
+          height: "auto",
+          maxHeight: `${calculatedHeight}px`,
         }}
         priority
       />
