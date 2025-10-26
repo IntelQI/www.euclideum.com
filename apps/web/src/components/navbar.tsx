@@ -1038,9 +1038,7 @@ export function Navbar() {
       <div className="container">
         <NavigationMenu 
           className="min-w-full [&>div:last-child]:left-auto" 
-          value={activeItem || undefined} 
-          onValueChange={setActiveItem}
-          onMouseLeave={() => setActiveItem(null)}
+          value={activeItem || undefined}
         >
           <div className="flex w-full justify-between gap-2 py-4">
             <Link
@@ -1053,15 +1051,19 @@ export function Navbar() {
               </span>
             </Link>
             <div className="flex items-center gap-2 xl:gap-8">
-              <NavigationMenuList className="hidden gap-0 lg:flex">
+              <NavigationMenuList 
+                className="hidden gap-0 lg:flex"
+                onMouseLeave={() => setActiveItem(null)}
+              >
                 {navigationMenuItems.map((item) => (
                   <NavigationMenuItem 
                     key={item.key} 
                     value={item.key}
+                    onMouseEnter={() => setActiveItem(item.key)}
                   >
                     <NavigationMenuTrigger 
                       className="text-xs xl:text-sm"
-                      onMouseEnter={() => setActiveItem(item.key)}
+                      onPointerDown={(e) => e.preventDefault()}
                     >
                       {item.label}
                     </NavigationMenuTrigger>
