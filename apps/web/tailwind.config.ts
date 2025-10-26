@@ -70,12 +70,12 @@ const config = {
       },
 
       height: {
-        '105': '26.25rem',
-        '140': '35rem',
+        "105": "26.25rem",
+        "140": "35rem",
       },
 
       translate: {
-        '34': '8.5rem',
+        "34": "8.5rem",
       },
 
       borderRadius: {

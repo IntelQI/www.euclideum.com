@@ -88,22 +88,23 @@ const HeroModern = ({
   const { theme, resolvedTheme } = useTheme();
 
   // Use resolvedTheme when available (ensures stored preference is applied on mount)
-  const [isDark,setIsDark]=useState(false);
+  const [isDark, setIsDark] = useState(false);
 
-  
-  useEffect(()=>{
-    if(theme=="dark"){
+  useEffect(() => {
+    if (theme == "dark") {
       setIsDark(true);
-    }else{setIsDark(false)}
-    
-  },[theme,resolvedTheme])
-
+    } else {
+      setIsDark(false);
+    }
+  }, [theme, resolvedTheme]);
 
   return (
     <section
       className={cn(
         "min-h-screen overflow-hidden relative",
-        isDark ? "hero-dark-bg" : "bg-gradient-to-b from-[#F7F7F9] to-[#FFFFFF]",
+        isDark
+          ? "hero-dark-bg"
+          : "bg-gradient-to-b from-[#F7F7F9] to-[#FFFFFF]",
       )}
     >
       <div className="container mx-auto px-4">
@@ -116,14 +117,16 @@ const HeroModern = ({
               <div className=" flex justify-start">
                 <div
                   className={cn(
-                    "inline-flex items-center gap-3 rounded-xl border px-4 py-5 bg-transparent",
+                    "inline-flex items-center gap-3 rounded-xl border px-4 py-2 bg-transparent",
                     isDark ? "border-gray-700" : "border-[#ECEEF1]",
                   )}
                 >
                   <span
                     className={cn(
-                      "rounded-full px-3 py-0.5 text-xs font-bold uppercase",
-                      isDark ? "bg-gray-800 text-[#00ED64]" : "bg-[#00ED64] text-[#001E2B]",
+                      "rounded-md px-4 py-2 text-xs font-bold uppercase",
+                      isDark
+                        ? "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A] hover:brightness-110"
+                        : "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A]",
                     )}
                   >
                     NEW
@@ -175,7 +178,9 @@ const HeroModern = ({
                   asChild
                   className={cn(
                     "h-12 rounded-md px-6 w-[100%] text-base font-medium transition-all",
-                    isDark ? "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A] hover:brightness-110" : "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A]",
+                    isDark
+                      ? "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A] hover:brightness-110"
+                      : "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A]",
                   )}
                 >
                   <a href={primaryButtonUrl}>{primaryButtonText}</a>
@@ -186,7 +191,9 @@ const HeroModern = ({
                     asChild
                     className={cn(
                       "h-12 rounded-md border-2 px-6 w-[100%] text-base font-medium transition-all",
-                      isDark ? "border-white text-white hover:bg-white/10" : "border-[#0E1116] text-[#0E1116] hover:bg-[#0E1116]/10",
+                      isDark
+                        ? "border-white text-white hover:bg-white/10"
+                        : "border-[#0E1116] text-[#0E1116] hover:bg-[#0E1116]/10",
                     )}
                   >
                     <a href={secondaryButtonUrl}>{secondaryButtonText}</a>
@@ -268,7 +275,6 @@ const HeroModern = ({
                   ))}
                 </div>
 
-             
                 <span
                   className={cn(
                     "absolute inset-x-0 top-0 -z-10 h-px",
@@ -292,8 +298,6 @@ const HeroModern = ({
               </div>
             </Tabs>
           </div>
-
-        
         </div>
       </div>
     </section>

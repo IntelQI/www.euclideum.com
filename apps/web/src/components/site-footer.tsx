@@ -317,110 +317,119 @@ export function SiteFooter() {
       <CTASection />
       <section className="py-10 bg-background">
         <footer className="container">
-        <div className="flex w-full flex-col gap-6">
-          <div className="grid w-full grid-cols-[repeat(2,minmax(auto,15rem))] gap-8 md:grid-cols-[repeat(4,1fr)_5rem] md:gap-0">
-            {NAVIGATION.map((section) => (
-              <div key={`${section.title}`}>
+          <div className="flex w-full flex-col gap-6">
+            <div className="grid w-full grid-cols-[repeat(2,minmax(auto,15rem))] gap-8 md:grid-cols-[repeat(4,1fr)_5rem] md:gap-0">
+              {NAVIGATION.map((section) => (
+                <div key={`${section.title}`}>
+                  <h2 className="mb-3 text-sm font-medium text-foreground">
+                    {section.title}
+                  </h2>
+                  <ul>
+                    {section.links.map((link, i) => (
+                      <li key={`${link.name}-${i}`} className="py-1.5">
+                        {getLink({
+                          name: link.name,
+                          href: link.href,
+                          type: link?.type,
+                          links: link?.links,
+                        })}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+              <div>
                 <h2 className="mb-3 text-sm font-medium text-foreground">
-                  {section.title}
+                  Social
                 </h2>
                 <ul>
-                  {section.links.map((link, i) => (
-                    <li key={`${link.name}-${i}`} className="py-1.5">
-                      {getLink({
-                        name: link.name,
-                        href: link.href,
-                        type: link?.type,
-                        links: link?.links,
-                      })}
+                  {SOCIAL_LINKS.map((link, i) => (
+                    <li className="py-1.5" key={`social-links-footer-${i}`}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex cursor-pointer items-center gap-2 text-sm leading-5 text-muted-foreground hover:text-foreground"
+                      >
+                        <link.icon className="size-3.5" />
+                        {link.name}
+                      </a>
                     </li>
                   ))}
                 </ul>
               </div>
-            ))}
-            <div>
-              <h2 className="mb-3 text-sm font-medium text-foreground">
-                Social
-              </h2>
-              <ul>
-                {SOCIAL_LINKS.map((link, i) => (
-                  <li className="py-1.5" key={`social-links-footer-${i}`}>
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex cursor-pointer items-center gap-2 text-sm leading-5 text-muted-foreground hover:text-foreground"
-                    >
-                      <link.icon className="size-3.5" />
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <Link
-              href="/"
-              className="col-[1/3] row-1 block size-9 md:col-[5/6] md:justify-self-end"
-            >
-              <ThemeLogo width={36} className="size-full object-cover object-center" />
-            </Link>
-          </div>
-          <div className="mt-6 flex w-full flex-wrap items-center justify-between gap-4">
-            <div>
-              <Button asChild variant="ghost" className="text-foreground">
-                <a href="https://status.euclideum.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
-                  <div className="relative size-[0.4375rem]">
-                    <span className="absolute top-1/2 left-1/2 z-10 size-[0.6875rem] -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-full bg-green-400/50" />
-                    <span className="absolute top-1/2 left-1/2 z-20 size-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500" />
-                  </div>
-                  All systems operational
-                </a>
-              </Button>
-            </div>
-            <div>
-              <ToggleGroup
-                value={theme}
-                onValueChange={onThemeChange}
-                type="single"
-                className="rounded-full border"
+              <Link
+                href="/"
+                className="col-[1/3] row-1 block size-9 md:col-[5/6] md:justify-self-end"
               >
-                <ToggleGroupItem
-                  value="system"
-                  aria-label="Toggle system theme"
-                  className="size-6 rounded-full p-0 data-[state=on]:bg-accent"
+                <ThemeLogo
+                  width={36}
+                  className="size-full object-cover object-center"
+                />
+              </Link>
+            </div>
+            <div className="mt-6 flex w-full flex-wrap items-center justify-between gap-4">
+              <div>
+                <Button asChild variant="ghost" className="text-foreground">
+                  <a
+                    href="https://status.euclideum.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3"
+                  >
+                    <div className="relative size-[0.4375rem]">
+                      <span className="absolute top-1/2 left-1/2 z-10 size-[0.6875rem] -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-full bg-green-400/50" />
+                      <span className="absolute top-1/2 left-1/2 z-20 size-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500" />
+                    </div>
+                    All systems operational
+                  </a>
+                </Button>
+              </div>
+              <div>
+                <ToggleGroup
+                  value={theme}
+                  onValueChange={onThemeChange}
+                  type="single"
+                  className="rounded-full border"
                 >
-                  <MonitorCog className="size-3 text-foreground" />
-                </ToggleGroupItem>
-                <ToggleGroupItem
-                  value="light"
-                  aria-label="Toggle light theme"
-                  className="size-6 rounded-full p-0 data-[state=on]:bg-accent"
-                >
-                  <Sun className="size-3 text-foreground" />
-                </ToggleGroupItem>
-                <ToggleGroupItem
-                  value="dark"
-                  aria-label="Toggle dark theme"
-                  className="size-6 rounded-full p-0 data-[state=on]:bg-accent"
-                >
-                  <Moon className="size-3 text-foreground" />
-                </ToggleGroupItem>
-              </ToggleGroup>
+                  <ToggleGroupItem
+                    value="system"
+                    aria-label="Toggle system theme"
+                    className="size-6 rounded-full p-0 data-[state=on]:bg-accent"
+                  >
+                    <MonitorCog className="size-3 text-foreground" />
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="light"
+                    aria-label="Toggle light theme"
+                    className="size-6 rounded-full p-0 data-[state=on]:bg-accent"
+                  >
+                    <Sun className="size-3 text-foreground" />
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="dark"
+                    aria-label="Toggle dark theme"
+                    className="size-6 rounded-full p-0 data-[state=on]:bg-accent"
+                  >
+                    <Moon className="size-3 text-foreground" />
+                  </ToggleGroupItem>
+                </ToggleGroup>
+              </div>
+            </div>
+            <div className="mt-3 border-t pt-6">
+              <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+                <p className="text-sm text-muted-foreground">
+                  © {currentYear} {siteConfig.company.legalName}. All rights
+                  reserved.
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {siteConfig.company.tagline}
+                </p>
+              </div>
             </div>
           </div>
-          <div className="mt-3 border-t pt-6">
-            <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-              <p className="text-sm text-muted-foreground">
-                © {currentYear} {siteConfig.company.legalName}. All rights reserved.
-              </p>
-              <p className="text-sm text-muted-foreground">
-                {siteConfig.company.tagline}
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </section>
+        </footer>
+      </section>
     </>
   );
 }
