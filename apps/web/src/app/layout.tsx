@@ -115,7 +115,7 @@ export default function RootLayout({ children }: AppLayoutProps) {
 
       <body
         className={cn(
-          "bg-background min-h-screen font-sans antialiased",
+          "bg-[white] min-h-screen font-sans antialiased",
           fontSans.variable,
         )}
       >

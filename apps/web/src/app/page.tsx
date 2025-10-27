@@ -1,7 +1,9 @@
 "use client";
 
 import { HeroModern } from "@/components/hero-modern";
+import IntegrationEcosystem from "@/components/integration-ecosystem";
 import FeatureShowcase from "@/components/feature-showcase";
+import LogoMarquee from "@/components/logo-marquee";
 
 export default function IndexPage() {
   return (
@@ -14,7 +16,12 @@ export default function IndexPage() {
         primaryButtonUrl="#"
         secondaryButtonUrl="#"
       />
+
       <FeatureShowcase />
+
+      <IntegrationEcosystem />
+
+      <LogoMarquee />
     </>
   );
 }
