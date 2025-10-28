@@ -65,10 +65,10 @@ export function ProductStartLearning({ className }: { className?: string }) {
             {/* Bright green splash shape (blur-3xl for soft blob) */}
             <div
               className={cn(
-                "absolute inset-0 m-auto w-92 h-82 rounded-full blur-3xl",
+                "absolute inset-0 m-auto w-82 h-82 rounded-full blur-3xl",
                 isDark
-                  ? "bg-[#44EB88] opacity-50" // brand-400
-                  : "bg-[#53FAA5] opacity-30", // brand-400 (light)
+                  ? "bg-[#44EB88] opacity-20" // brand-400
+                  : "bg-[#53FAA5] opacity-20", // brand-400 (light)
               )}
             ></div>
 
