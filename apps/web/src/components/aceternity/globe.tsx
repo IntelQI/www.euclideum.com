@@ -382,8 +382,9 @@ export function World({ data, globeConfig }: WorldProps) {
   useEffect(() => {
     // Check for WebGL support
     try {
-      const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      const canvas = document.createElement("canvas");
+      const gl =
+        canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
       if (!gl) {
         setHasWebGLError(true);
         return;
@@ -413,11 +414,11 @@ export function World({ data, globeConfig }: WorldProps) {
           near: 0.1,
           far: 1000,
         }}
-        gl={{ 
-          alpha: true, 
+        gl={{
+          alpha: true,
           antialias: true,
           powerPreference: "high-performance",
-          failIfMajorPerformanceCaveat: false
+          failIfMajorPerformanceCaveat: false,
         }}
         style={{ background: "transparent" }}
       >

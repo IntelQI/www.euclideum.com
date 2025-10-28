@@ -9,13 +9,13 @@ export default function IntegrationEcosystem() {
   return (
     <section
       aria-labelledby="ecosys-heading"
-      className="w-full"
+      className="w-full mt-10"
       style={{ paddingBlock: "72px" }}
     >
       <div
         className="mx-auto "
         style={{
-          maxWidth: "95%",
+          maxWidth: "80%",
           paddingInline: "clamp(24px, 4vw, 40px)",
         }}
       >
