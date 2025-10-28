@@ -9,7 +9,7 @@ export default function IntegrationEcosystem() {
   return (
     <section
       aria-labelledby="ecosys-heading"
-      className="w-full bg-white"
+      className="w-full"
       style={{ paddingBlock: "72px" }}
     >
       <div

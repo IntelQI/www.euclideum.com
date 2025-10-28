@@ -300,6 +300,230 @@ const HeroModern = ({
           </div>
         </div>
       </div>
+
+      {/* Trusted Teams Banner */}
+      <section
+        className={cn(
+          "w-full py-10 md:py-12",
+          isDark ? "bg-[#011d29]" : "bg-[#072F49]",
+        )}
+      >
+        <div className="mx-auto max-w-[100%] px-6 md:px-8 lg:px-[7rem]">
+          {/* Kicker with accent bar */}
+          <div className="flex items-center gap-3">
+            <span
+              className={cn(
+                "h-4 w-1 rounded",
+                isDark ? "bg-[#00ED64]" : "bg-[#2AA198]",
+              )}
+            />
+            <p
+              className={cn(
+                "text-xs md:text-sm font-medium uppercase tracking-[0.2em]",
+                isDark ? "text-[#D1D5DB]/80" : "text-[#ECEEF1]/80",
+              )}
+            >
+              Trusted by teams at
+            </p>
+          </div>
+
+          {/* Gap */}
+          <div className="mt-5 md:mt-[2rem]" />
+
+          {/* Logos */}
+          <ul className="flex items-center justify-between gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-none">
+            <li className="snap-center shrink-0">
+              <a
+                href="#"
+                className={cn(
+                  "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
+                  isDark
+                    ? "focus-visible:outline-[#00ED64]"
+                    : "focus-visible:outline-[#2AA198]",
+                )}
+                aria-label={`Partner company`}
+              >
+                <img
+                  src={
+                    "https://webimages.mongodb.com/_com_assets/cms/mf3zbid4lnnsn26o0-Wells.svg?auto=format%252Ccompress"
+                  }
+                  alt={`Partner company logo`}
+                  className={cn(
+                    "h-6 sm:h-7 md:h-3 w-auto object-contain transition-opacity duration-200",
+                    isDark
+                      ? "opacity-80 hover:opacity-100"
+                      : "opacity-90 hover:opacity-100",
+                    "filter grayscale brightness-200",
+                  )}
+                  loading="lazy"
+                />
+              </a>
+            </li>
+            <li className="snap-center shrink-0">
+              <a
+                href="#"
+                className={cn(
+                  "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
+                  isDark
+                    ? "focus-visible:outline-[#00ED64]"
+                    : "focus-visible:outline-[#2AA198]",
+                )}
+                aria-label={`Partner company`}
+              >
+                <img
+                  src={
+                    "https://webimages.mongodb.com/_com_assets/cms/mf56fvdg8c5b6hlcx-Loreal.svg?auto=format%252Ccompress"
+                  }
+                  alt={`Partner company logo`}
+                  className={cn(
+                    "h-6 sm:h-7 md:h-7 w-auto object-contain transition-opacity duration-200",
+                    isDark
+                      ? "opacity-80 hover:opacity-100"
+                      : "opacity-90 hover:opacity-100",
+                    "filter grayscale brightness-200",
+                  )}
+                  loading="lazy"
+                />
+              </a>
+            </li>
+            <li className="snap-center shrink-0">
+              <a
+                href="#"
+                className={cn(
+                  "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
+                  isDark
+                    ? "focus-visible:outline-[#00ED64]"
+                    : "focus-visible:outline-[#2AA198]",
+                )}
+                aria-label={`Partner company`}
+              >
+                <img
+                  src={
+                    "https://webimages.mongodb.com/_com_assets/cms/mf56g8483iw759rrp-Cisco.svg?auto=format%252Ccompress"
+                  }
+                  alt={`Partner company logo`}
+                  className={cn(
+                    "h-6 sm:h-7 md:h-10 w-auto object-contain transition-opacity duration-200",
+                    isDark
+                      ? "opacity-80 hover:opacity-100"
+                      : "opacity-90 hover:opacity-100",
+                    "filter grayscale brightness-200",
+                  )}
+                  loading="lazy"
+                />
+              </a>
+            </li>
+            <li className="snap-center shrink-0">
+              <a
+                href="#"
+                className={cn(
+                  "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
+                  isDark
+                    ? "focus-visible:outline-[#00ED64]"
+                    : "focus-visible:outline-[#2AA198]",
+                )}
+                aria-label={`Partner company`}
+              >
+                <img
+                  src={
+                    "https://webimages.mongodb.com/_com_assets/cms/mfe3zm6fqtnmg53st-Coinbase_Wordmark_White.svg?auto=format%252Ccompress"
+                  }
+                  alt={`Partner company logo`}
+                  className={cn(
+                    "h-6 sm:h-7 md:h-4 w-auto object-contain transition-opacity duration-200",
+                    isDark
+                      ? "opacity-80 hover:opacity-100"
+                      : "opacity-90 hover:opacity-100",
+                    "filter grayscale brightness-200",
+                  )}
+                  loading="lazy"
+                />
+              </a>
+            </li>
+            <li className="snap-center shrink-0">
+              <a
+                href="#"
+                className={cn(
+                  "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
+                  isDark
+                    ? "focus-visible:outline-[#00ED64]"
+                    : "focus-visible:outline-[#2AA198]",
+                )}
+                aria-label={`Partner company`}
+              >
+                <img
+                  src={
+                    "https://webimages.mongodb.com/_com_assets/cms/mf56gzj1q176iqatb-Sega.svg?auto=format%252Ccompress"
+                  }
+                  alt={`Partner company logo`}
+                  className={cn(
+                    "h-6 sm:h-7 md:h-7 w-auto object-contain transition-opacity duration-200",
+                    isDark
+                      ? "opacity-80 hover:opacity-100"
+                      : "opacity-90 hover:opacity-100",
+                    "filter grayscale brightness-200",
+                  )}
+                  loading="lazy"
+                />
+              </a>
+            </li>
+            <li className="snap-center shrink-0">
+              <a
+                href="#"
+                className={cn(
+                  "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
+                  isDark
+                    ? "focus-visible:outline-[#00ED64]"
+                    : "focus-visible:outline-[#2AA198]",
+                )}
+                aria-label={`Partner company`}
+              >
+                <img
+                  src={
+                    "https://webimages.mongodb.com/_com_assets/cms/mf56hdollsoq6r6f6-Forbes.svg?auto=format%252Ccompress"
+                  }
+                  alt={`Partner company logo`}
+                  className={cn(
+                    "h-6 sm:h-7 md:h-6 w-auto object-contain transition-opacity duration-200",
+                    isDark
+                      ? "opacity-80 hover:opacity-100"
+                      : "opacity-90 hover:opacity-100",
+                    "filter grayscale brightness-200",
+                  )}
+                  loading="lazy"
+                />
+              </a>
+            </li>
+            <li className="snap-center shrink-0">
+              <a
+                href="#"
+                className={cn(
+                  "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
+                  isDark
+                    ? "focus-visible:outline-[#00ED64]"
+                    : "focus-visible:outline-[#2AA198]",
+                )}
+                aria-label={`Partner company`}
+              >
+                <img
+                  src={
+                    "https://webimages.mongodb.com/_com_assets/cms/mfdqez39r48bzo8jd-LG_U-logo%201.svg?auto=format%252Ccompress"
+                  }
+                  alt={`Partner company logo`}
+                  className={cn(
+                    "h-6 sm:h-7 md:h-8 w-auto object-contain transition-opacity duration-200",
+                    isDark
+                      ? "opacity-80 hover:opacity-100"
+                      : "opacity-90 hover:opacity-100",
+                    "filter grayscale brightness-200",
+                  )}
+                  loading="lazy"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
     </section>
   );
 };
