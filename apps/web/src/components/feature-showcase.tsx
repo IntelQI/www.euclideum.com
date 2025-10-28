@@ -164,19 +164,21 @@ export const FeatureShowcase = ({
       >
         <div className="w-full">
           <div className="flex flex-col lg:flex-row gap-0 items-start pl-4 lg:pl-12 pr-0">
-            <div className="max-w-md flex-shrink-0 relative" style={{ minHeight: '460px' }}>
+            <div
+              className="max-w-md flex-shrink-0 relative"
+              style={{ minHeight: "460px" }}
+            >
               <h2
                 id="feature-showcase-heading"
                 className={cn(
                   "text-[36px] h-[90px] font-semibold leading-tight ",
-                  isDark
-                    ? "bg-clip-text text-transparent"
-                    : "text-[black]",
+                  isDark ? "bg-clip-text text-transparent" : "text-[black]",
                 )}
                 style={
                   isDark
                     ? {
-                        backgroundImage: "linear-gradient(91deg, #b1ff05 0%, #00ed64 94.83%)",
+                        backgroundImage:
+                          "linear-gradient(91deg, #b1ff05 0%, #00ed64 94.83%)",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                         textShadow: "0 8px 24px rgba(0, 237, 100, 0.06)",
@@ -203,7 +205,9 @@ export const FeatureShowcase = ({
                 aria-label="Product Documentation"
                 className={cn(
                   "inline-flex items-center gap-2 text-[18px] font-medium transition-colors",
-                  isDark ? "text-white hover:text-[#00ED64]" : "text-white hover:text-[#00ED64]",
+                  isDark
+                    ? "text-white hover:text-[#00ED64]"
+                    : "text-white hover:text-[#00ED64]",
                 )}
               >
                 <span>Product documentation</span>
@@ -229,7 +233,12 @@ export const FeatureShowcase = ({
               {/* Carousel Dots - Positioned at bottom */}
               <div className="absolute bottom-0 left-0 flex items-center gap-2 px-4 py-2.5 rounded-full border-2 border-[#1a1a1a] bg-transparent w-fit">
                 {cards.map((_, index) => {
-                  const actualIndex = currentCardIndex === 0 ? cards.length - 1 : currentCardIndex === cards.length + 1 ? 0 : currentCardIndex - 1;
+                  const actualIndex =
+                    currentCardIndex === 0
+                      ? cards.length - 1
+                      : currentCardIndex === cards.length + 1
+                        ? 0
+                        : currentCardIndex - 1;
                   return (
                     <button
                       key={index}
@@ -388,7 +397,12 @@ export const FeatureShowcase = ({
                   {/* Original cards */}
                   {cards.map((c, index) => {
                     // Calculate actual card index (accounting for cloned cards)
-                    const actualDisplayIndex = currentCardIndex === 0 ? cards.length - 1 : currentCardIndex === cards.length + 1 ? 0 : currentCardIndex - 1;
+                    const actualDisplayIndex =
+                      currentCardIndex === 0
+                        ? cards.length - 1
+                        : currentCardIndex === cards.length + 1
+                          ? 0
+                          : currentCardIndex - 1;
                     // Check if this card is the third visible card (index 2 from current position)
                     const isThirdCard = index === actualDisplayIndex + 2;
 
@@ -410,65 +424,73 @@ export const FeatureShowcase = ({
                           <div className="absolute inset-0 bg-[#A6B0B5] opacity-30 rounded-[48px] z-10 pointer-events-none" />
                         )}
 
-                      <div
-                        className={cn(
-                          "mb-6 h-[220px] w-full rounded-[32px] flex items-center justify-center",
-                          "bg-[#F5F6F7]",
-                        )}
-                      >
-                        <img
-                          src={c.image}
-                          alt={c.title}
-                          className="h-full w-full object-contain"
-                        />
-                      </div>
-
-                      <h3
-                        className={cn(
-                          "text-[24px] font-semibold mb-3 text-[#001E2B] leading-[1.3] px-2",
-                        )}
-                      >
-                        {c.title}
-                      </h3>
-
-                      <p className="text-[15px] mb-3 text-[#3A4048] leading-[1.5] flex-grow px-6">
-                        {c.body}
-                      </p>
-
-                      <a
-                        href="#"
-                        className={cn(
-                          "inline-flex items-center text-[15px] font-medium text-[#001E2B]",
-                          "gap-2 mt-auto px-6",
-                        )}
-                      >
-                        <span>{index === 0 ? "Start learning" : index === 1 ? "Learn more" : index === 2 ? "Visit the Learning Hub" : "Learn more"}</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          aria-hidden
-                          className="w-5 h-5"
+                        <div
+                          className={cn(
+                            "mb-6 h-[220px] w-full rounded-[32px] flex items-center justify-center",
+                            "bg-[#F5F6F7]",
+                          )}
                         >
-                          <path
-                            d="M5 12h14"
-                            stroke="#001E2B"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
+                          <img
+                            src={c.image}
+                            alt={c.title}
+                            className="h-full w-full object-contain"
                           />
-                          <path
-                            d="M13 6l6 6-6 6"
-                            stroke="#001E2B"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </a>
-                    </article>
+                        </div>
+
+                        <h3
+                          className={cn(
+                            "text-[24px] font-semibold mb-3 text-[#001E2B] leading-[1.3] px-2",
+                          )}
+                        >
+                          {c.title}
+                        </h3>
+
+                        <p className="text-[15px] mb-3 text-[#3A4048] leading-[1.5] flex-grow px-6">
+                          {c.body}
+                        </p>
+
+                        <a
+                          href="#"
+                          className={cn(
+                            "inline-flex items-center text-[15px] font-medium text-[#001E2B]",
+                            "gap-2 mt-auto px-6",
+                          )}
+                        >
+                          <span>
+                            {index === 0
+                              ? "Start learning"
+                              : index === 1
+                                ? "Learn more"
+                                : index === 2
+                                  ? "Visit the Learning Hub"
+                                  : "Learn more"}
+                          </span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            aria-hidden
+                            className="w-5 h-5"
+                          >
+                            <path
+                              d="M5 12h14"
+                              stroke="#001E2B"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M13 6l6 6-6 6"
+                              stroke="#001E2B"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </a>
+                      </article>
                     );
                   })}
 

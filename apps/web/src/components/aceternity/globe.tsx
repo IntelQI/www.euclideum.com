@@ -6,6 +6,7 @@ import { Vector3 } from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
+import { FallbackGlobe } from "./fallback-globe";
 
 interface ArcData {
   order: number;
@@ -376,13 +377,32 @@ function Scene3D({
 
 export function World({ data, globeConfig }: WorldProps) {
   const [geoData, setGeoData] = useState<GeoJSONData | null>(null);
+  const [hasWebGLError, setHasWebGLError] = useState(false);
 
   useEffect(() => {
+    // Check for WebGL support
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) {
+        setHasWebGLError(true);
+        return;
+      }
+    } catch (e) {
+      setHasWebGLError(true);
+      return;
+    }
+
     fetch("/globe.json")
       .then((res) => res.json())
       .then((data: GeoJSONData) => setGeoData(data))
       .catch((err) => console.error("Error loading globe data:", err));
   }, []);
+
+  // Show fallback if WebGL is not supported
+  if (hasWebGLError) {
+    return <FallbackGlobe />;
+  }
 
   return (
     <div className="absolute inset-0 w-full h-full">
@@ -393,7 +413,12 @@ export function World({ data, globeConfig }: WorldProps) {
           near: 0.1,
           far: 1000,
         }}
-        gl={{ alpha: true, antialias: true }}
+        gl={{ 
+          alpha: true, 
+          antialias: true,
+          powerPreference: "high-performance",
+          failIfMajorPerformanceCaveat: false
+        }}
         style={{ background: "transparent" }}
       >
         <Scene3D data={data} globeConfig={globeConfig} geoData={geoData} />

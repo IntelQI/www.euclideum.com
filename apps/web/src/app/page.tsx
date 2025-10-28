@@ -4,6 +4,7 @@ import { HeroModern } from "@/components/hero-modern";
 import IntegrationEcosystem from "@/components/integration-ecosystem";
 import FeatureShowcase from "@/components/feature-showcase";
 import LogoMarquee from "@/components/logo-marquee";
+import DeveloperSection from "@/components/developer-section";
 
 export default function IndexPage() {
   return (
@@ -18,6 +19,8 @@ export default function IndexPage() {
       />
 
       <FeatureShowcase />
+
+      <DeveloperSection />
 
       <IntegrationEcosystem />
 
