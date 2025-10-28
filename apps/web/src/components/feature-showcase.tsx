@@ -15,22 +15,28 @@ interface Card {
 
 const defaultCards: Card[] = [
   {
-    title: "MongoDB Skill Badges",
-    body: "Enhance your MongoDB knowledge with free, focused Skill Badge credentials designed to help you quickly learn and validate specific skills.",
-    image:
-      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/dashboard/admin-dashboard-1.png",
-  },
-  {
     title: "MongoDB University",
     body: "Take free, expert-led courses to sharpen your skills and earn industry-recognized badges.",
     image:
-      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/dashboard/admin-dashboard-2.png",
+      "https://webassets.mongodb.com/_com_assets/cms/General_EDUCATION_Books_Spot-8upjxf07mh.png",
   },
   {
     title: "Atlas Learning Hub",
-    body: "Discover tutorials, guides, and labs to master MongoDB Atlas and its features.",
+    body: "Discover tutorials, guides, and videos to master MongoDB Atlas and its features.",
     image:
-      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/dashboard/admin-developer.png",
+      "https://webassets.mongodb.com/_com_assets/cms/General_TECHNOLOGY_Database_Spot-2wg5l2xj87.png",
+  },
+  {
+    title: "Build Smarter with AI",
+    body: "Learn to build intelligent apps with AI tools and our AI partner ecosystem.",
+    image:
+      "https://webassets.mongodb.com/_com_assets/cms/Brand%20Shape%20No%20Shape%20Color%20None-1-ea29md0g6b.png",
+  },
+  {
+    title: "Voyage AI",
+    body: "State-of-the art embedding models and rerankers made for building, scaling, and deploying intelligent applications.",
+    image:
+      "https://webimages.mongodb.com/_com_assets/cms/mf2j8sqlmf95xq2zy-400x400%20-%20VoyageAI%20MDB%20-%20White.png?auto=format%252Ccompress",
   },
 ];
 
@@ -105,6 +111,44 @@ export const FeatureShowcase = ({
     useCases[0]!.key,
   );
 
+  const [currentCardIndex, setCurrentCardIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+
+  const handlePrevCard = () => {
+    setCurrentCardIndex((prev) => prev - 1);
+  };
+
+  const handleNextCard = () => {
+    setCurrentCardIndex((prev) => prev + 1);
+  };
+
+  // Handle infinite loop transition - instant jump
+  useEffect(() => {
+    if (currentCardIndex === 0) {
+      const timeout = setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentCardIndex(cards.length);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setIsTransitioning(true);
+          });
+        });
+      }, 50);
+      return () => clearTimeout(timeout);
+    } else if (currentCardIndex === cards.length + 1) {
+      const timeout = setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentCardIndex(1);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setIsTransitioning(true);
+          });
+        });
+      }, 50);
+      return () => clearTimeout(timeout);
+    }
+  }, [currentCardIndex, cards.length]);
+
   useEffect(() => {
     // prefer resolvedTheme when available
     const t = resolvedTheme || theme;
@@ -118,20 +162,21 @@ export const FeatureShowcase = ({
         className={cn("py-20", isDark ? "bg-[#001E2B]" : "bg-[#F9FAFB]")}
         aria-labelledby="feature-showcase-heading"
       >
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            <div className="max-w-md">
+        <div className="w-full">
+          <div className="flex flex-col lg:flex-row gap-0 items-start pl-4 lg:pl-12 pr-0">
+            <div className="max-w-md flex-shrink-0 relative" style={{ minHeight: '460px' }}>
               <h2
                 id="feature-showcase-heading"
                 className={cn(
-                  "text-5xl  md:text-4xl h-[90px] font-semibold leading-tight ",
+                  "text-[36px] h-[90px] font-semibold leading-tight ",
                   isDark
-                    ? "bg-gradient-to-b from-[#C6FF00] via-[#A3FF3C] to-[#00ED64] bg-clip-text text-transparent"
+                    ? "bg-clip-text text-transparent"
                     : "text-[black]",
                 )}
                 style={
                   isDark
                     ? {
+                        backgroundImage: "linear-gradient(91deg, #b1ff05 0%, #00ed64 94.83%)",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                         textShadow: "0 8px 24px rgba(0, 237, 100, 0.06)",
@@ -145,7 +190,7 @@ export const FeatureShowcase = ({
               </h2>
               <p
                 className={cn(
-                  "mb-6 max-w-[390px] text-2xl opacity-75",
+                  "mb-6 max-w-[390px] text-[20px] opacity-75 leading-[1.5]",
                   isDark ? "text-[#D1D5DB]" : "text-[#3A4048]",
                 )}
               >
@@ -153,84 +198,163 @@ export const FeatureShowcase = ({
                 faster and <br />
                 smarter with MongoDB.
               </p>
-              <Button asChild>
-                <a
-                  href="#"
-                  aria-label="Product Documentation"
-                  className={cn(
-                    "focus-visible:ring-ring inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 h-9 px-4 gap-2 rounded-full shadow-md",
-                    isDark
-                      ? "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A] focus-visible:ring-[#00ED64]/20"
-                      : "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A] focus-visible:ring-[#00ED64]/20",
-                  )}
+              <a
+                href="#"
+                aria-label="Product Documentation"
+                className={cn(
+                  "inline-flex items-center gap-2 text-[18px] font-medium transition-colors",
+                  isDark ? "text-white hover:text-[#00ED64]" : "text-white hover:text-[#00ED64]",
+                )}
+              >
+                <span>Product documentation</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden
+                  className="w-[18px] h-[18px]"
                 >
-                  <span>Product Documentation</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden
-                    className="w-4 h-4"
-                  >
-                    <path
-                      d="M5 12h14"
-                      stroke="#001E2B"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                  <path
+                    d="M9 18l6-6-6-6"
+                    stroke="#00ED64"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+
+              {/* Carousel Dots - Positioned at bottom */}
+              <div className="absolute bottom-0 left-0 flex items-center gap-2 px-4 py-2.5 rounded-full border-2 border-[#1a1a1a] bg-transparent w-fit">
+                {cards.map((_, index) => {
+                  const actualIndex = currentCardIndex === 0 ? cards.length - 1 : currentCardIndex === cards.length + 1 ? 0 : currentCardIndex - 1;
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentCardIndex(index + 1)}
+                      className={cn(
+                        "h-2 rounded-full transition-all",
+                        actualIndex === index
+                          ? "w-8 bg-[#00ED64]"
+                          : "w-2 bg-white/30",
+                      )}
+                      aria-label={`Go to slide ${index + 1}`}
                     />
-                    <path
-                      d="M13 6l6 6-6 6"
-                      stroke="#001E2B"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </Button>
+                  );
+                })}
+              </div>
             </div>
 
-            <div className="lg:col-span-2">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {cards.map((c) => (
+            <div className="relative flex-1 lg:ml-8 min-w-0">
+              {/* Previous Button */}
+              <button
+                onClick={handlePrevCard}
+                className={cn(
+                  "absolute left-0 top-[248px] -translate-y-1/2 z-10 -translate-x-4",
+                  "w-12 h-12 rounded-full flex items-center justify-center",
+                  "bg-[#00ED64] hover:bg-[#00C85A] transition-colors",
+                  "border border-[#001E2B]/10",
+                )}
+                aria-label="Previous card"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="w-5 h-5"
+                >
+                  <path
+                    d="M19 12H5M5 12l7 7m-7-7l7-7"
+                    stroke="#001E2B"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+
+              {/* Next Button */}
+              <button
+                onClick={handleNextCard}
+                className={cn(
+                  "absolute right-4 top-[248px] -translate-y-1/2 z-10",
+                  "w-12 h-12 rounded-full flex items-center justify-center",
+                  "bg-[#00ED64] hover:bg-[#00C85A] transition-colors",
+                  "border border-[#001E2B]/10",
+                )}
+                aria-label="Next card"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="w-5 h-5"
+                >
+                  <path
+                    d="M5 12h14m-7-7l7 7-7 7"
+                    stroke="#001E2B"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+
+              <div className="overflow-hidden w-full">
+                <div
+                  className={`flex gap-6 ${isTransitioning ? "transition-transform duration-300 ease-out" : ""}`}
+                  style={{
+                    transform: `translateX(-${currentCardIndex * (391 + 24)}px)`,
+                  }}
+                >
+                  {/* Clone last card at the beginning */}
                   <article
-                    key={c.title}
                     className={cn(
-                      "rounded-[32px] overflow-hidden p-6 shadow-[0_8px_30px_rgba(2,6,23,0.45)]",
-                      "bg-white border border-transparent",
+                      "rounded-[48px] overflow-hidden p-4 flex-shrink-0 relative flex flex-col",
+                      "bg-white border border-[#3D4F58]",
+                      "w-[391px] min-w-[391px] max-w-[391px] h-[460px]",
                     )}
+                    style={{
+                      boxShadow:
+                        "rgba(0, 30, 43, 0.12) 0px 26px 44px 0px, rgba(0, 0, 0, 0.13) 0px 7px 13px 0px",
+                    }}
                   >
                     <div
                       className={cn(
-                        "mb-6 h-44 w-full rounded-xl flex items-center justify-center",
-                        isDark ? "bg-[#F5F6F7]" : "bg-[#F5F6F7]",
+                        "mb-6 h-[220px] w-full rounded-[32px] flex items-center justify-center",
+                        "bg-[#F5F6F7]",
                       )}
                     >
                       <img
-                        src={c.image}
-                        alt={c.title}
-                        className="h-full w-full object-contain rounded-md"
+                        src={cards[cards.length - 1]!.image}
+                        alt={cards[cards.length - 1]!.title}
+                        className="h-full w-full object-contain"
                       />
                     </div>
 
                     <h3
                       className={cn(
-                        "text-2xl font-semibold mb-3 text-[#0B3C5D]",
+                        "text-[24px] font-semibold mb-4 text-[#001E2B] leading-[1.3] px-6",
                       )}
                     >
-                      {c.title}
+                      {cards[cards.length - 1]!.title}
                     </h3>
 
-                    <p className="text-sm mb-6 text-[#3A4048]">{c.body}</p>
+                    <p className="text-[15px] mb-3 text-[#3A4048] leading-[1.5] flex-grow px-6">
+                      {cards[cards.length - 1]!.body}
+                    </p>
 
                     <a
                       href="#"
                       className={cn(
-                        "inline-flex items-center text-sm font-medium text-[#0B3C5D]",
-                        "gap-2",
+                        "inline-flex items-center text-[15px] font-medium text-[#001E2B]",
+                        "gap-2 mt-auto px-6",
                       )}
                     >
                       <span>Learn more</span>
@@ -241,18 +365,18 @@ export const FeatureShowcase = ({
                         viewBox="0 0 24 24"
                         fill="none"
                         aria-hidden
-                        className="w-4 h-4"
+                        className="w-5 h-5"
                       >
                         <path
                           d="M5 12h14"
-                          stroke="#0B3C5D"
+                          stroke="#001E2B"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                         <path
                           d="M13 6l6 6-6 6"
-                          stroke="#0B3C5D"
+                          stroke="#001E2B"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -260,7 +384,166 @@ export const FeatureShowcase = ({
                       </svg>
                     </a>
                   </article>
-                ))}
+
+                  {/* Original cards */}
+                  {cards.map((c, index) => {
+                    // Calculate actual card index (accounting for cloned cards)
+                    const actualDisplayIndex = currentCardIndex === 0 ? cards.length - 1 : currentCardIndex === cards.length + 1 ? 0 : currentCardIndex - 1;
+                    // Check if this card is the third visible card (index 2 from current position)
+                    const isThirdCard = index === actualDisplayIndex + 2;
+
+                    return (
+                      <article
+                        key={c.title}
+                        className={cn(
+                          "rounded-[48px] overflow-hidden p-4 flex-shrink-0 relative flex flex-col",
+                          "bg-white border border-[#3D4F58]",
+                          "w-[391px] min-w-[391px] max-w-[391px] h-[460px]",
+                        )}
+                        style={{
+                          boxShadow:
+                            "rgba(0, 30, 43, 0.12) 0px 26px 44px 0px, rgba(0, 0, 0, 0.13) 0px 7px 13px 0px",
+                        }}
+                      >
+                        {/* Overlay for third visible card */}
+                        {isThirdCard && (
+                          <div className="absolute inset-0 bg-[#A6B0B5] opacity-30 rounded-[48px] z-10 pointer-events-none" />
+                        )}
+
+                      <div
+                        className={cn(
+                          "mb-6 h-[220px] w-full rounded-[32px] flex items-center justify-center",
+                          "bg-[#F5F6F7]",
+                        )}
+                      >
+                        <img
+                          src={c.image}
+                          alt={c.title}
+                          className="h-full w-full object-contain"
+                        />
+                      </div>
+
+                      <h3
+                        className={cn(
+                          "text-[24px] font-semibold mb-3 text-[#001E2B] leading-[1.3] px-2",
+                        )}
+                      >
+                        {c.title}
+                      </h3>
+
+                      <p className="text-[15px] mb-3 text-[#3A4048] leading-[1.5] flex-grow px-6">
+                        {c.body}
+                      </p>
+
+                      <a
+                        href="#"
+                        className={cn(
+                          "inline-flex items-center text-[15px] font-medium text-[#001E2B]",
+                          "gap-2 mt-auto px-6",
+                        )}
+                      >
+                        <span>{index === 0 ? "Start learning" : index === 1 ? "Learn more" : index === 2 ? "Visit the Learning Hub" : "Learn more"}</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          aria-hidden
+                          className="w-5 h-5"
+                        >
+                          <path
+                            d="M5 12h14"
+                            stroke="#001E2B"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M13 6l6 6-6 6"
+                            stroke="#001E2B"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </a>
+                    </article>
+                    );
+                  })}
+
+                  {/* Clone first card at the end */}
+                  <article
+                    className={cn(
+                      "rounded-[48px] overflow-hidden p-4 flex-shrink-0 relative flex flex-col",
+                      "bg-white border border-[#3D4F58]",
+                      "w-[391px] min-w-[391px] max-w-[391px] h-[460px]",
+                    )}
+                    style={{
+                      boxShadow:
+                        "rgba(0, 30, 43, 0.12) 0px 26px 44px 0px, rgba(0, 0, 0, 0.13) 0px 7px 13px 0px",
+                    }}
+                  >
+                    <div
+                      className={cn(
+                        "mb-6 h-[220px] w-full rounded-[32px] flex items-center justify-center",
+                        "bg-[#F5F6F7]",
+                      )}
+                    >
+                      <img
+                        src={cards[0]!.image}
+                        alt={cards[0]!.title}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+
+                    <h3
+                      className={cn(
+                        "text-[24px] font-semibold mb-4 text-[#001E2B] leading-[1.3] px-6",
+                      )}
+                    >
+                      {cards[0]!.title}
+                    </h3>
+
+                    <p className="text-[15px] mb-3 text-[#3A4048] leading-[1.5] flex-grow px-6">
+                      {cards[0]!.body}
+                    </p>
+
+                    <a
+                      href="#"
+                      className={cn(
+                        "inline-flex items-center text-[15px] font-medium text-[#001E2B]",
+                        "gap-2 mt-auto px-6",
+                      )}
+                    >
+                      <span>Start learning</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden
+                        className="w-5 h-5"
+                      >
+                        <path
+                          d="M5 12h14"
+                          stroke="#001E2B"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M13 6l6 6-6 6"
+                          stroke="#001E2B"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </a>
+                  </article>
+                </div>
               </div>
             </div>
           </div>
