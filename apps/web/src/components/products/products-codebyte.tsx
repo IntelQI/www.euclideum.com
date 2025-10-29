@@ -447,7 +447,9 @@ export function CodeByte({ className }: { className?: string }) {
                     tabIndex={isActive ? 0 : -1}
                     onClick={() => handleTabClick(index)}
                     onKeyDown={(e) => handleTabKeyDown(e, index)}
-                    ref={(el) => (tabRefs.current[index] = el)}
+                    ref={(el) => {
+                      tabRefs.current[index] = el;
+                    }}
                     className={cn(
                       "px-4 py-1.5 rounded-full text-sm font-medium transition-colors",
                       "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
