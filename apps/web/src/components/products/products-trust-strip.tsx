@@ -89,7 +89,7 @@ export function LogoTrustStrip({ className }: { className?: string }) {
       className={cn(
         "w-full bg-background",
         "py-12 md:py-16", // ~48px - 64px padding
-     
+
         className,
       )}
     >
@@ -127,7 +127,7 @@ export function LogoTrustStrip({ className }: { className?: string }) {
               className={cn(
                 "h-6 sm:h-7 md:h-10 w-auto object-contain transition-opacity duration-200", // Adjusted md:h for better visual parity with desktop description
                 isDark
-                  ? "opacity-80 hover:opacity-100 filter invert sepia-100 saturate-0 hue-rotate-[200deg] brightness-200" 
+                  ? "opacity-80 hover:opacity-100 filter invert sepia-100 saturate-0 hue-rotate-[200deg] brightness-200"
                   : "opacity-90 hover:opacity-100",
               )}
               loading="lazy"

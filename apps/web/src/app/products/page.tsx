@@ -1,7 +1,8 @@
-import { AtlasHero } from "@/components/atlas-hero";
-import { DemoCallout } from "@/components/product-demo";
-import { ProductStartLearning } from "@/components/product-start-learning";
-import { LogoTrustStrip } from "@/components/products-trust-strip";
+import { AtlasHero } from "@/components/products/atlas-hero";
+import { DemoCallout } from "@/components/products/product-demo";
+import { ProductStartLearning } from "@/components/products/product-start-learning";
+import { CodeByte } from "@/components/products/products-codebyte";
+import { LogoTrustStrip } from "@/components/products/products-trust-strip";
 
 export default function ProductsPage() {
   return (
@@ -10,6 +11,7 @@ export default function ProductsPage() {
       <DemoCallout />
       <ProductStartLearning />
       <LogoTrustStrip />
+      <CodeByte />
     </main>
   );
 }
