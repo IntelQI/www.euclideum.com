@@ -9,7 +9,7 @@ interface CtaHeaderProps {
 }
 
 interface Feature {
-  imageUrl: React.ReactNode;
+  imageUrl: string;
   title: string;
   description: string;
   href: string;
