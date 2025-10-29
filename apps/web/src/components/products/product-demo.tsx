@@ -34,7 +34,7 @@ export function DemoCallout({ className }: DemoCalloutProps) {
       */}
       <div
         className={cn(
-          "w-full max-w-[60rem] rounded-[16px] sm:rounded-[24px] overflow-hidden transition-all duration-200 ease-in-out",
+          "w-full max-w-[75rem] rounded-[16px] sm:rounded-[24px] overflow-hidden transition-all duration-200 ease-in-out",
           "motion-safe:hover:shadow-lg",
           isDark
             ? "bg-[white] border border-[#1F3442] shadow-[0_0_0_1px_rgba(38,64,82,0.5),_0_4px_12px_rgba(0,0,0,0.5)]" // panel-700, border-600, custom dark shadow
@@ -45,8 +45,8 @@ export function DemoCallout({ className }: DemoCalloutProps) {
         <div
           className="
             grid grid-cols-1 lg:grid-cols-[minmax(0,_46fr)_minmax(0,_54fr)] 
-            items-center gap-6 sm:gap-8 lg:gap-12 
-            p-6 sm:p-8 md:p-10 lg:px-12 lg:py-8
+            items-center gap-6 sm:gap-8 lg:gap-[10rem] 
+            p-6 sm:p-8 md:p-10 lg:px-12 lg:py-2
           "
         >
           {/* == Left Column: Content == */}
@@ -54,7 +54,7 @@ export function DemoCallout({ className }: DemoCalloutProps) {
             {/* Headline */}
             <h2
               className={cn(
-                "text-2xl sm:text-3xl font-semibold leading-tight tracking-tight",
+                "text-2xl sm:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight",
                 isDark ? "text-[#001a28]" : "text-[#17232E]", // text-100 : text-900
               )}
             >
@@ -65,7 +65,7 @@ export function DemoCallout({ className }: DemoCalloutProps) {
             {/* Body */}
             <p
               className={cn(
-                "text-sm sm:text-base leading-relaxed max-w-[24rem] lg:max-w-[20rem]",
+                "text-sm sm:text-base lg:text-xl leading-relaxed max-w-[24rem] lg:max-w-[30rem]",
                 isDark ? "text-[#93A6B3]" : "text-[#5F6C7B]", // text-300 : text-600
               )}
             >

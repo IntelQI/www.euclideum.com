@@ -10,7 +10,7 @@ const stepData = {
   deploy: {
     title: "Deploy a database",
     description:
-      "Get started with Atlas by deploying your first cluster. It's fast, simple, and fully managed.",
+      "Create a cloud database in seconds using the Atlas UI, CLI, Kubernetes Operator, or an Infrastructure-as-Code (IaC) resource provider. Play around with a free cluster, launch a flex tier instance, or customize a dedicated cluster configuration.",
     cta: { text: "Get started with Atlas", href: "#" },
     tabs: [
       "Atlas CLI",
@@ -74,7 +74,7 @@ spec:
   query: {
     title: "Query data of any structure",
     description:
-      "Use the flexible MongoDB Query API to find and analyze your data, no matter its shape.",
+      "Our unified Query API makes it easy to work with any modern data such as arrays, geospatial, time series and more. Query, transform, and analyze data in place as your schema evolves.",
     cta: { text: "Learn about the Query API", href: "#" },
     tabs: [
       "CRUD",
@@ -131,7 +131,7 @@ const pipeline = [
   build: {
     title: "Build your way",
     description:
-      "Connect your application and start building with our extensive drivers and framework integrations.",
+      "Build queries with the MongoDB Shell, Compass, or directly in your programming language of choice.",
     cta: { text: "See all drivers", href: "#" },
     tabs: ["Node.js", "Python", "Java", "Go"],
     code: [
@@ -259,7 +259,7 @@ export function CodeByte({ className }: { className?: string }) {
   // This component is always dark, but uses different dark colors
   // from the palette based on the current theme.
   const canvasColor = isDark ? "bg-[#0B1217]" : "bg-[#17232E]";
-  const cardColor = isDark ? "bg-[#162632]" : "bg-[#0B1217]";
+  const cardColor = isDark ? "bg-[#162632]" : "bg-[#21313c]";
   const borderColor = isDark ? "border-[#264052]" : "border-[#36414A]";
   const textColor = isDark ? "text-[#E6F1F8]" : "text-black";
   const mutedTextColor = isDark ? "text-[#93A6B3]" : "text-gray-500";
@@ -285,7 +285,7 @@ export function CodeByte({ className }: { className?: string }) {
       className={cn("w-full py-16 md:py-[8rem] bg-background", className)}
     >
       {/* Centered, left-aligned inner container */}
-      <div className="w-full max-w-6xl mx-auto px-4">
+      <div className="w-full max-w-[100%] mx-auto px-20">
         {/* Headline:
           - Very large display type
           - Tight leading and tracking
@@ -293,7 +293,7 @@ export function CodeByte({ className }: { className?: string }) {
         */}
         <h2
           className={cn(
-            "text-5xl md:text-6xl font-normal leading-[1.1] tracking-tighter",
+            "text-5xl md:text-6xl font-normal leading-[1.1] tracking-relaxed",
             isDark
               ? "text-[#E6F1F8]" // dark: text-100 (near-white)
               : "text-black", // light: panel-400 (white)
@@ -309,7 +309,7 @@ export function CodeByte({ className }: { className?: string }) {
         */}
         <p
           className={cn(
-            "mt-6 text-md max-w-2xl",
+            "mt-6 text-xl max-w-3xl",
             isDark
               ? "text-[#93A6B3]" // dark: text-300 (muted gray)
               : "text-gray-500", // light: text-400 (muted gray)
@@ -322,15 +322,15 @@ export function CodeByte({ className }: { className?: string }) {
       </div>
 
       {/* Centered, 2-column grid */}
-      <div className="w-full mt-20 max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="w-full mt-20 max-w-[100%] mx-auto px-20 grid grid-cols-1 lg:grid-cols-10 gap-8">
         {/* == Left Column: Navigation == */}
         <aside className="lg:col-span-4 flex flex-col gap-8">
           {/* View Docs Button */}
           <a
             href="#start-learning" // <-- Replace with your link
             className={cn(
-              "inline-block self-start px-8 py-2 text-black",
-              " rounded-md hover:rounded-full font-semibold text-sm shadow-sm", // "pill-shaped"
+              "inline-block self-start px-10 py-3 text-black",
+              " rounded-sm hover:rounded-full font-semibold text-md shadow-sm", // "pill-shaped"
               "transition-all duration-200 ease-in-out",
               "motion-safe:hover:shadow-md motion-safe:hover:brightness-110",
               "motion-safe:active:translate-y-px motion-safe:active:brightness-100",
@@ -363,15 +363,14 @@ export function CodeByte({ className }: { className?: string }) {
                     onClick={() => handleStepClick(key)}
                     className={cn(
                       "flex items-center w-full p-4 text-left", // Use p-4 for consistent spacing
-                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ",
                       focusRing,
                       focusOffset,
-                      isActive ? activeBg : inactiveHoverBg,
                       "motion-safe:transition-colors",
                     )}
                   >
                     {/* Title (no chevron, no separate accent) */}
-                    <span className={cn("font-semibold", textColor)}>
+                    <span className={cn("font-semibold text-2xl", textColor)}>
                       {step.title}
                     </span>
                   </button>
@@ -384,17 +383,16 @@ export function CodeByte({ className }: { className?: string }) {
                       isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
                     )}
                   >
-                    <div className="overflow-hidden">
+                    <div className="overflow-hidden ">
                       {/* Content wrapper with correct padding and spacing */}
                       <div
                         className={cn(
                           "pl-4 pr-4 pt-3 pb-4 flex flex-col gap-3", // 12px spacing
-                          isActive ? activeBg : "",
                         )}
                       >
                         <p
                           className={cn(
-                            "text-base leading-relaxed", // 1.6-1.75 line-height
+                            "text-md leading-relaxed", // 1.6-1.75 line-height
                             mutedTextColor,
                           )}
                         >
@@ -426,7 +424,7 @@ export function CodeByte({ className }: { className?: string }) {
         </aside>
 
         {/* == Right Column: Code Panel == */}
-        <article className="lg:col-span-8">
+        <article className="lg:col-span-6">
           <div
             className={cn(
               "w-full rounded-lg shadow-lg min-h-[520px] flex flex-col",
@@ -479,7 +477,7 @@ export function CodeByte({ className }: { className?: string }) {
                     >
                       {i + 1}
                     </span>
-                    <span className={textColor}>{line}</span>
+                    <span className={"text-white"}>{line}</span>
                   </div>
                 ))}
               </pre>

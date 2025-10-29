@@ -28,13 +28,13 @@ export function AtlasHero({ className }: AtlasHeroProps) {
         className,
       )}
     >
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 xl:px-12 py-8 sm:py-12 lg:py-3">
+      <div className="mx-auto max-w-[100%] px-4 sm:px-6 lg:px-8 xl:px-12 py-0 sm:py-12 lg:py-0">
         <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-12">
           {/* Left Column - Content */}
-          <div className="lg:col-span-6 w-full max-w-[30rem] mx-auto lg:mx-0">
+          <div className="lg:col-span-6 w-full max-w-[40rem] mx-auto lg:mx-0">
             <span
               className={cn(
-                "mb-3 sm:mb-4 inline-block text-[0.75rem] sm:text-xs font-medium uppercase tracking-widest",
+                "mb-3 sm:mb-4 xl:mb-[4rem] inline-block text-[0.75rem] sm:text-xs font-medium uppercase tracking-widest",
                 isDark ? "text-[#E8F1F7]" : "text-[#01684b]",
               )}
             >
@@ -43,7 +43,7 @@ export function AtlasHero({ className }: AtlasHeroProps) {
 
             <h1
               className={cn(
-                "mb-4 sm:mb-6 mt-6 sm:mt-[3rem] max-w-[32ch] font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-normal",
+                "mb-4 sm:mb-6 mt-6 sm:mt-[3rem] max-w-[100rem] font-display text-3xl sm:text-4xl lg:text-6xl font-semibold leading-[1.1] tracking-normal",
                 isDark ? "text-[#01ec64]" : "text-[#01684b]",
               )}
             >
@@ -120,7 +120,7 @@ export function AtlasHero({ className }: AtlasHeroProps) {
               src="https://webimages.mongodb.com/_com_assets/cms/m6jgrb0ludripg8mx-Technical_ACTION_Developer_blue_EndCap_BS_Lavender%204%20(1).svg?ixlib=js-3.7.1&auto=format%2Ccompress&w=1946"
               alt=""
               role="presentation"
-              className="relative z-10 w-full max-w-[35rem] object-contain px-4 sm:px-0"
+              className="relative z-10 w-full max-w-[45rem] object-contain px-4 sm:px-0"
             />
           </div>
         </div>
