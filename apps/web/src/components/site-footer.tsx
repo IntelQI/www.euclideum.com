@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
+import { useMounted } from "@/lib/opendocs/hooks/use-mounted";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -220,7 +221,7 @@ const SOCIAL_LINKS = [
   },
 ];
 
-const getLink = ({ type, href, name, links }: NavigationLink) => {
+const getLink = ({ type, href, name, links, mounted }: NavigationLink & { mounted?: boolean }) => {
   if (type == "EXTERNAL_LINK") {
     return (
       <a
@@ -230,7 +231,7 @@ const getLink = ({ type, href, name, links }: NavigationLink) => {
         className="inline-flex cursor-pointer items-center gap-0.5 text-sm leading-5 text-muted-foreground hover:text-foreground"
       >
         <div>{name}</div>
-        <ExternalLink className="size-3.5" />
+        {mounted && <ExternalLink className="size-3.5" aria-hidden="true" />}
       </a>
     );
   }
@@ -242,7 +243,7 @@ const getLink = ({ type, href, name, links }: NavigationLink) => {
           <Drawer>
             <DrawerTrigger className="inline-flex cursor-pointer items-center gap-0.5 text-sm leading-5 text-muted-foreground hover:text-foreground">
               {name}
-              <ChevronDown className="size-3.5" />
+              {mounted && <ChevronDown className="size-3.5" aria-hidden="true" />}
             </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader>
@@ -272,7 +273,7 @@ const getLink = ({ type, href, name, links }: NavigationLink) => {
             <DropdownMenuTrigger asChild>
               <button className="inline-flex cursor-pointer items-center gap-0.5 text-sm leading-5 text-muted-foreground hover:text-foreground">
                 {name}
-                <ChevronDown className="size-3.5" />
+                {mounted && <ChevronDown className="size-3.5" aria-hidden="true" />}
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
@@ -304,6 +305,7 @@ const getLink = ({ type, href, name, links }: NavigationLink) => {
 
 export function SiteFooter() {
   const { theme, setTheme } = useTheme();
+  const mounted = useMounted();
   const currentYear = new Date().getFullYear();
 
   const onThemeChange = (value: "light" | "dark" | "system") => {
@@ -332,6 +334,7 @@ export function SiteFooter() {
                           href: link.href,
                           type: link?.type,
                           links: link?.links,
+                          mounted,
                         })}
                       </li>
                     ))}
@@ -342,16 +345,17 @@ export function SiteFooter() {
                 <h2 className="mb-3 text-sm font-medium text-foreground">
                   Social
                 </h2>
-                <ul>
+                <ul suppressHydrationWarning>
                   {SOCIAL_LINKS.map((link, i) => (
-                    <li className="py-1.5" key={`social-links-footer-${i}`}>
+                    <li className="py-1.5" key={`social-links-footer-${i}`} suppressHydrationWarning>
                       <a
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex cursor-pointer items-center gap-2 text-sm leading-5 text-muted-foreground hover:text-foreground"
+                        suppressHydrationWarning
                       >
-                        <link.icon className="size-3.5" />
+                        <link.icon className="size-3.5" aria-hidden="true" />
                         {link.name}
                       </a>
                     </li>
@@ -391,27 +395,31 @@ export function SiteFooter() {
                   onValueChange={onThemeChange}
                   type="single"
                   className="rounded-full border"
+                  suppressHydrationWarning
                 >
                   <ToggleGroupItem
                     value="system"
                     aria-label="Toggle system theme"
                     className="size-6 rounded-full p-0 data-[state=on]:bg-accent"
+                    suppressHydrationWarning
                   >
-                    <MonitorCog className="size-3 text-foreground" />
+                    {mounted && <MonitorCog className="size-3 text-foreground" aria-hidden="true" />}
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="light"
                     aria-label="Toggle light theme"
                     className="size-6 rounded-full p-0 data-[state=on]:bg-accent"
+                    suppressHydrationWarning
                   >
-                    <Sun className="size-3 text-foreground" />
+                    {mounted && <Sun className="size-3 text-foreground" aria-hidden="true" />}
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="dark"
                     aria-label="Toggle dark theme"
                     className="size-6 rounded-full p-0 data-[state=on]:bg-accent"
+                    suppressHydrationWarning
                   >
-                    <Moon className="size-3 text-foreground" />
+                    {mounted && <Moon className="size-3 text-foreground" aria-hidden="true" />}
                   </ToggleGroupItem>
                 </ToggleGroup>
               </div>

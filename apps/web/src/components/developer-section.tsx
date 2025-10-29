@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
+import { useMounted } from "@/lib/opendocs/hooks/use-mounted";
 
 type Stat = { value: string; label: string };
 type Cta = { type: "primary" | "link"; label: string; href: string };
@@ -111,8 +112,26 @@ const CASES: Case[] = [
 ];
 
 export default function DeveloperSection() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
+  const { theme, resolvedTheme } = useTheme();
+  const mounted = useMounted();
+  
+  // Default to light theme for initial render to match server-side
+  // Server doesn't know theme, so it renders with light theme classes
+  // After mount, we'll update to the actual theme
+  const [isDark, setIsDark] = useState<boolean>(false);
+  
+  useEffect(() => {
+    if (!mounted) return;
+    // Wait a tick to ensure hydration is complete before updating theme
+    const timeoutId = setTimeout(() => {
+      const currentTheme = resolvedTheme || theme || "dark";
+      setIsDark(currentTheme === "dark");
+    }, 0);
+    return () => clearTimeout(timeoutId);
+  }, [theme, resolvedTheme, mounted]);
+  
+  // Use light theme during SSR and initial client render to match server output
+  const effectiveIsDark = mounted ? isDark : false;
 
   const [selected, setSelected] = useState<number>(0);
   const btnRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -146,8 +165,9 @@ export default function DeveloperSection() {
           <h2
             className={cn(
               "col-span-8 text-3xl md:text-4xl font-semibold leading-tight",
-              isDark ? "text-black" : "text-slate-900",
+              effectiveIsDark ? "text-black" : "text-slate-900",
             )}
+            suppressHydrationWarning
           >
             Loved by developers, trusted by <br /> enterprises
           </h2>
@@ -157,7 +177,7 @@ export default function DeveloperSection() {
               href="#"
               className={cn(
                 "inline-flex items-center gap-2 text-base font-medium hover:underline focus:outline-none",
-                isDark
+                effectiveIsDark
                   ? "text-[black] focus-visible:outline-[#00ED64]"
                   : "text-[#2563EB] focus-visible:outline-[#2563EB]",
               )}
@@ -201,7 +221,7 @@ export default function DeveloperSection() {
                   className={cn(
                     "group flex flex-col items-center gap-4 px-6 md:px-8 lg:px-10 bg-transparent focus:outline-none",
                     "focus-visible:outline-2 focus-visible:outline-offset-3",
-                    isDark
+                    effectiveIsDark
                       ? "focus-visible:outline-[#00ED64]"
                       : "focus-visible:outline-[#2563EB]",
                   )}
@@ -223,10 +243,10 @@ export default function DeveloperSection() {
                     className={cn(
                       "block w-full rounded-full transition-colors duration-200",
                       isSelected
-                        ? isDark
+                        ? effectiveIsDark
                           ? "bg-[#E8F1F7]" // brand-50
                           : "bg-[#0B3C5D]" // brand-500
-                        : isDark
+                        : effectiveIsDark
                           ? "bg-[#3A4048]/30" // neutral-600/30
                           : "bg-[#ECEEF1]", // neutral-100
                       "group-hover:bg-opacity-80",
@@ -256,7 +276,7 @@ export default function DeveloperSection() {
                   aria-hidden="true"
                   className={cn(
                     "pointer-events-none absolute -right-12 top-0 bottom-0 w-24 flex items-center justify-center",
-                    isDark ? "text-[#3A4048]/10" : "text-[#ECEEF1]",
+                    effectiveIsDark ? "text-[#3A4048]/10" : "text-[#ECEEF1]",
                   )}
                 >
                   <svg
@@ -279,7 +299,7 @@ export default function DeveloperSection() {
                       <p
                         className={cn(
                           "text-4xl md:text-2xl font-semibold",
-                          isDark ? "text-[#01684b]" : "text-[#01684b]",
+                          effectiveIsDark ? "text-[#01684b]" : "text-[#01684b]",
                         )}
                       >
                         {s.value}
@@ -287,7 +307,7 @@ export default function DeveloperSection() {
                       <p
                         className={cn(
                           "mt-2 leading-relaxed text-sm w-[45%]",
-                          isDark ? "text-[#3A4048]" : "text-[#3A4048]",
+                          effectiveIsDark ? "text-[#3A4048]" : "text-[#3A4048]",
                         )}
                       >
                         {s.label}
@@ -324,11 +344,11 @@ export default function DeveloperSection() {
                       className={cn(
                         "inline-flex items-center justify-center rounded-[10px] px-5 py-3 shadow-sm",
                         "transition duration-150",
-                        isDark
+                        effectiveIsDark
                           ? "bg-[#E8F1F7] text-[#072F49] hover:opacity-95"
                           : "bg-[#072F49] text-white hover:opacity-95",
                         "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-                        isDark
+                        effectiveIsDark
                           ? "focus-visible:ring-[#E8F1F7]"
                           : "focus-visible:ring-[#0B3C5D]",
                       )}
@@ -343,9 +363,9 @@ export default function DeveloperSection() {
                       className={cn(
                         "inline-flex items-center gap-2 font-medium",
                         "transition-colors duration-150 hover:underline",
-                        isDark ? "text-white" : "text-[#0B3C5D]",
+                        effectiveIsDark ? "text-white" : "text-[#0B3C5D]",
                         "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-                        isDark
+                        effectiveIsDark
                           ? "focus-visible:ring-[#E8F1F7]"
                           : "focus-visible:ring-[#0B3C5D]",
                       )}

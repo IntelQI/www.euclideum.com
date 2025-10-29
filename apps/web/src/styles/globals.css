@@ -54,7 +54,7 @@
         #2a4149,
         transparent 50%
       ),
-      linear-gradient(180deg, #0b0f139c 0%, #001e2b 100%);
+      linear-gradient(180deg, #001b29 0%, #001b29 50%, #001e2b 100%);
     background-blend-mode: normal;
     background-repeat: no-repeat;
     background-size: cover;
@@ -62,19 +62,49 @@
     isolation: isolate;
   }
 
-  /* faint technical grid overlay */
+  /* technical grid overlay - visible in dark mode, with radial gradient fade */
   .hero-dark-bg::before {
     content: "";
     position: absolute;
     inset: 0;
     background-image: linear-gradient(
-        rgba(255, 255, 255, 0.08) 1px,
+        rgba(0, 237, 100, 0.12) 1px,
         transparent 1px
       ),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      linear-gradient(90deg, rgba(0, 237, 100, 0.12) 1px, transparent 1px);
     background-size: 64px 64px;
-    mix-blend-mode: overlay;
+    mix-blend-mode: normal;
     pointer-events: none;
+    z-index: 0;
+    mask-image: radial-gradient(
+      ellipse 100% 80% at center,
+      rgba(0, 0, 0, 1) 30%,
+      rgba(0, 0, 0, 0.6) 60%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 100% 80% at center,
+      rgba(0, 0, 0, 1) 30%,
+      rgba(0, 0, 0, 0.6) 60%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+
+  /* light mode grid overlay - visible grid pattern */
+  .hero-light-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+        rgba(27, 43, 57, 0.08) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(27, 43, 57, 0.08) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mix-blend-mode: normal;
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: 0;
   }
 
   /* accessible text styling */

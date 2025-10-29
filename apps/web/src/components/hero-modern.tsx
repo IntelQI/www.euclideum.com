@@ -1,21 +1,18 @@
 "use client";
 
 import {
-  BarChart,
-  Database,
-  Layers,
-  PieChart,
-  SquareKanban,
-  Zap,
-  Settings,
-  Grid,
+  Building2,
+  Users,
+  Wallet,
+  Calculator,
+  GraduationCap,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useTheme } from "next-themes";
 
 import { cn } from "@/lib/utils";
+import { useMounted } from "@/lib/opendocs/hooks/use-mounted";
 
-import { BorderBeam } from "@/components/magicui/border-beam";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -37,41 +34,42 @@ interface HeroModernProps {
   theme?: "dark" | "light";
 }
 
+// Create default tabs with icons that have explicit size to prevent hydration mismatches
 const defaultTabs: Tab[] = [
   {
-    title: "Analytics",
-    icon: <PieChart />,
+    title: "ERP",
+    icon: <Building2 size={16} />,
     image:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/dashboard/admin-dashboard-1.png",
-    description: "Real-time insights and performance metrics",
+    description: "Enterprise Resource Planning solutions",
   },
   {
-    title: "Performance",
-    icon: <Zap />,
+    title: "HRMS",
+    icon: <Users size={16} />,
     image:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/dashboard/admin-dashboard-2.png",
-    description: "Optimized for speed and efficiency",
+    description: "Human Resource Management System",
   },
   {
-    title: "Insights",
-    icon: <Database />,
+    title: "Payroll",
+    icon: <Wallet size={16} />,
     image:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/dashboard/admin-dashboard-3.png",
-    description: "Deep data analysis and reporting",
+    description: "Automated payroll processing",
   },
   {
-    title: "Configuration",
-    icon: <Settings />,
+    title: "Accounting",
+    icon: <Calculator size={16} />,
     image:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/dashboard/admin-users.png",
-    description: "Flexible settings and customization",
+    description: "Financial accounting and bookkeeping",
   },
   {
-    title: "Resources",
-    icon: <Grid />,
+    title: "LMS",
+    icon: <GraduationCap size={16} />,
     image:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/dashboard/admin-developer.png",
-    description: "Manage assets and infrastructure",
+    description: "Learning Management System",
   },
 ];
 
@@ -84,31 +82,47 @@ const HeroModern = ({
   secondaryButtonText = "Documentation",
   tabs = defaultTabs,
 }: HeroModernProps) => {
-  const [activeTab, setActiveTab] = useState(tabs[0]?.title || "");
+  const [activeTab, setActiveTab] = useState(() => tabs[0]?.title || "");
+  const mounted = useMounted();
+  
+  // Must call useTheme unconditionally (React hooks rule)
+  // But we'll ignore its values until after mount to prevent hydration mismatch
   const { theme, resolvedTheme } = useTheme();
+  
+  // Use tabs directly but render icons conditionally to prevent hydration mismatch
+  const stableTabs = useMemo(() => tabs, [tabs]);
 
-  // Use resolvedTheme when available (ensures stored preference is applied on mount)
-  const [isDark, setIsDark] = useState(false);
+  // Default to dark theme for SSR and initial render
+  // This matches the defaultTheme="dark" in ThemeProvider
+  const [isDark, setIsDark] = useState<boolean>(true);
 
   useEffect(() => {
-    if (theme == "dark") {
-      setIsDark(true);
-    } else {
-      setIsDark(false);
-    }
-  }, [theme, resolvedTheme]);
+    if (!mounted) return;
+    // Wait a tick to ensure hydration is complete before updating theme
+    // This prevents hydration mismatch errors
+    const timeoutId = setTimeout(() => {
+      const currentTheme = resolvedTheme || theme || "dark";
+      setIsDark(currentTheme === "dark");
+    }, 0);
+    return () => clearTimeout(timeoutId);
+  }, [theme, resolvedTheme, mounted]);
+
+  // Use dark theme during SSR and initial client render to match server output
+  // After mount, useEffect will update to the correct theme
+  const effectiveIsDark = isDark;
 
   return (
     <section
       className={cn(
         "min-h-screen overflow-hidden relative",
-        isDark
+        effectiveIsDark
           ? "hero-dark-bg"
-          : "bg-gradient-to-b from-[#F7F7F9] to-[#FFFFFF]",
+          : "bg-gradient-to-b from-[#F7F7F9] to-[#FFFFFF] hero-light-bg",
       )}
+      suppressHydrationWarning
     >
-      <div className="container mx-auto px-4">
-        <div className="py-20 lg:py-15">
+      <div className="container mx-auto px-4 relative z-10" suppressHydrationWarning>
+        <div className="py-20 lg:py-15" suppressHydrationWarning>
           {/* Hero Content - Split Layout */}
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[6.5fr_3.5fr] lg:items-start">
             {/* Left Section - Headline */}
@@ -117,16 +131,14 @@ const HeroModern = ({
               <div className=" flex justify-start">
                 <div
                   className={cn(
-                    "inline-flex items-center gap-3 rounded-xl border px-4 py-2 bg-transparent",
-                    isDark ? "border-gray-700" : "border-[#ECEEF1]",
+                    "inline-flex items-center gap-3 rounded-xl border-2 px-4 py-2 bg-transparent",
+                    effectiveIsDark ? "border-white/40" : "border-[#001b29]",
                   )}
                 >
                   <span
                     className={cn(
                       "rounded-md px-4 py-2 text-xs font-bold uppercase",
-                      isDark
-                        ? "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A] hover:brightness-110"
-                        : "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A]",
+                      "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A] hover:brightness-110",
                     )}
                   >
                     NEW
@@ -134,11 +146,10 @@ const HeroModern = ({
                   <span
                     className={cn(
                       "text-sm",
-                      isDark ? "text-white" : "text-[#0E1116]",
+                      effectiveIsDark ? "text-white" : "text-[#0E1116]",
                     )}
                   >
-                    Modernize 2-3x faster with MongoDB's Application
-                    Modernization Platform →
+                    NEW: Announcing our new Client Onboarding - ICT Mumbai
                   </span>
                 </div>
               </div>
@@ -146,19 +157,24 @@ const HeroModern = ({
               <h1
                 className={cn(
                   "text-5xl font-normal leading-relaxed tracking-tight md:text-6xl lg:text-7xl md:leading-relaxed lg:leading-relaxed",
-                  isDark ? "text-white" : "text-[#0E1116]",
+                  effectiveIsDark ? "text-white" : "text-[#0E1116]",
                 )}
               >
-                Get tips on setting up your{" "}
+                Shaping the Future of {" "}
                 <span
                   className={cn(
-                    "relative inline-block after:absolute after:bottom-3 after:left-0 after:h-0.5 after:w-full after:rounded-full",
-                    theme === "dark"
-                      ? "after:bg-[#00ED64]"
-                      : "after:bg-[#00ED64]",
+                    "relative inline-block after:absolute after:bottom-3 after:left-0 after:h-1 after:w-full after:rounded-full after:bg-[#00ED64]",
                   )}
                 >
-                  first cluster
+                  Learning
+                </span>
+                {" "} & {" "}
+                <span
+                  className={cn(
+                    "relative inline-block after:absolute after:bottom-3 after:left-0 after:h-1 after:w-full after:rounded-full after:bg-[#00ED64]",
+                  )}
+                >
+                  Enterprises
                 </span>
               </h1>
             </div>
@@ -168,7 +184,7 @@ const HeroModern = ({
               <p
                 className={cn(
                   "text-lg leading-relaxed md:text-xl",
-                  isDark ? "text-white/80" : "text-[#3A4048]",
+                    effectiveIsDark ? "text-white" : "text-[#3A4048]",
                 )}
               >
                 {description}
@@ -177,10 +193,10 @@ const HeroModern = ({
                 <Button
                   asChild
                   className={cn(
-                    "h-12 rounded-md px-6 w-[100%] text-base font-medium transition-all",
-                    isDark
-                      ? "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A] hover:brightness-110"
-                      : "bg-[#00ED64] text-[#001E2B] hover:bg-[#00C85A]",
+                    "h-12 rounded-md border-2 px-6 w-[100%] text-base font-medium transition-all",
+                    effectiveIsDark
+                      ? "bg-[#00ED64] border-[#00ED64] text-[#001E2B] hover:bg-[#00C85A] hover:border-[#00C85A] hover:shadow-lg"
+                      : "bg-[#00ED64] border-[#00ED64] text-[#001E2B] hover:bg-[#00ED64] hover:border-[#00ED64] hover:shadow-lg hover:shadow-[#00ED64]/50",
                   )}
                 >
                   <a href={primaryButtonUrl}>{primaryButtonText}</a>
@@ -191,9 +207,9 @@ const HeroModern = ({
                     asChild
                     className={cn(
                       "h-12 rounded-md border-2 px-6 w-[100%] text-base font-medium transition-all",
-                      isDark
-                        ? "border-white text-white hover:bg-white/10"
-                        : "border-[#0E1116] text-[#0E1116] hover:bg-[#0E1116]/10",
+                      effectiveIsDark
+                        ? "bg-transparent border-white text-white hover:bg-[#00ED64] hover:border-[#00ED64] hover:text-[#001E2B] hover:shadow-lg"
+                        : "border-[#0E1116] text-[#0E1116] hover:border-[#00ED64] hover:bg-[#00ED64] hover:text-[#001E2B] hover:shadow-lg hover:shadow-[#00ED64]/50",
                     )}
                   >
                     <a href={secondaryButtonUrl}>{secondaryButtonText}</a>
@@ -204,22 +220,26 @@ const HeroModern = ({
           </div>
 
           {/* Tabs Section */}
-          <div className="mt-16 md:mt-24 lg:mt-10">
-            <Tabs defaultValue={tabs[0]?.title} onValueChange={setActiveTab}>
-              <div className="mb-12 px-2 flex justify-center">
-                <TabsList className="mx-auto inline-flex h-auto w-fit max-w-md flex-wrap gap-1 rounded-lg border-2 bg-transparent p-1 lg:max-w-4xl">
-                  {tabs.map((tab) => (
+          <div className="mt-12 md:mt-16 lg:mt-8" suppressHydrationWarning>
+            <Tabs defaultValue={stableTabs[0]?.title} onValueChange={setActiveTab}>
+              <div className="mb-8 px-2 flex justify-center" suppressHydrationWarning>
+                <TabsList className={cn(
+                  "mx-auto inline-flex h-auto w-fit max-w-md flex-wrap gap-2 rounded-lg border-2 bg-transparent p-0.5 lg:max-w-4xl",
+                  effectiveIsDark ? "border-white/40" : "border-[#001b29]"
+                )} suppressHydrationWarning>
+                  {stableTabs.map((tab) => (
                     <TabsTrigger
                       key={tab.title}
                       value={tab.title}
                       className={cn(
-                        "h-9 rounded-md px-4 text-sm font-medium transition-all",
-                        isDark
+                        "h-8 rounded-md px-3 text-xs font-medium transition-all",
+                        effectiveIsDark
                           ? "text-[#D1D5DB] data-[state=active]:bg-[#00ED64] data-[state=active]:text-[#001E2B]"
                           : "text-[#3A4048] data-[state=active]:bg-[#0B3C5D] data-[state=active]:text-white",
                       )}
+                      suppressHydrationWarning
                     >
-                      <span className="mr-2">{tab.icon}</span>
+                      {mounted && <span className="mr-1.5">{tab.icon}</span>}
                       {tab.title}
                     </TabsTrigger>
                   ))}
@@ -228,7 +248,7 @@ const HeroModern = ({
 
               <div className="relative isolate">
                 <div className="relative z-10">
-                  {tabs.map((tab) => (
+                  {stableTabs.map((tab) => (
                     <TabsContent
                       key={tab.title}
                       value={tab.title}
@@ -247,29 +267,6 @@ const HeroModern = ({
                           alt={tab.title}
                           className="aspect-[16/10] w-full object-cover"
                         />
-                        <BorderBeam
-                          duration={8}
-                          size={100}
-                          colorFrom="#00ED64"
-                          colorTo="#00C85A"
-                        />
-                        {tab.description && (
-                          <div
-                            className={cn(
-                              "absolute bottom-0 left-0 right-0 bg-gradient-to-t p-6",
-                              isDark ? "from-[#001E2B]" : "from-white/95",
-                            )}
-                          >
-                            <p
-                              className={cn(
-                                "text-sm font-medium",
-                                isDark ? "text-white" : "text-[#0E1116]",
-                              )}
-                            >
-                              {tab.description}
-                            </p>
-                          </div>
-                        )}
                       </div>
                     </TabsContent>
                   ))}
@@ -278,7 +275,7 @@ const HeroModern = ({
                 <span
                   className={cn(
                     "absolute inset-x-0 top-0 -z-10 h-px",
-                    isDark ? "bg-white/20" : "bg-[#C8CDD3]",
+                    effectiveIsDark ? "bg-white/20" : "bg-[#C8CDD3]",
                   )}
                   style={{
                     maskImage:
@@ -288,7 +285,7 @@ const HeroModern = ({
                 <span
                   className={cn(
                     "absolute inset-x-0 bottom-0 -z-10 h-px",
-                    isDark ? "bg-white/20" : "bg-[#C8CDD3]",
+                    effectiveIsDark ? "bg-white/20" : "bg-[#C8CDD3]",
                   )}
                   style={{
                     maskImage:
@@ -305,8 +302,9 @@ const HeroModern = ({
       <section
         className={cn(
           "w-full py-10 md:py-12",
-          isDark ? "bg-[#011d29]" : "bg-[#072F49]",
+          effectiveIsDark ? "bg-[#011d29]" : "bg-[#072F49]",
         )}
+        suppressHydrationWarning
       >
         <div className="mx-auto max-w-[100%] px-6 md:px-8 lg:px-[7rem]">
           {/* Kicker with accent bar */}
@@ -314,13 +312,13 @@ const HeroModern = ({
             <span
               className={cn(
                 "h-4 w-1 rounded",
-                isDark ? "bg-[#00ED64]" : "bg-[#2AA198]",
+                effectiveIsDark ? "bg-[#00ED64]" : "bg-[#2AA198]",
               )}
             />
             <p
               className={cn(
                 "text-xs md:text-sm font-medium uppercase tracking-[0.2em]",
-                isDark ? "text-[#D1D5DB]/80" : "text-[#ECEEF1]/80",
+                effectiveIsDark ? "text-[#D1D5DB]/80" : "text-[#ECEEF1]/80",
               )}
             >
               Trusted by teams at
@@ -337,7 +335,7 @@ const HeroModern = ({
                 href="#"
                 className={cn(
                   "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
-                  isDark
+                  effectiveIsDark
                     ? "focus-visible:outline-[#00ED64]"
                     : "focus-visible:outline-[#2AA198]",
                 )}
@@ -350,7 +348,7 @@ const HeroModern = ({
                   alt={`Partner company logo`}
                   className={cn(
                     "h-6 sm:h-7 md:h-3 w-auto object-contain transition-opacity duration-200",
-                    isDark
+                    effectiveIsDark
                       ? "opacity-80 hover:opacity-100"
                       : "opacity-90 hover:opacity-100",
                     "filter grayscale brightness-200",
@@ -364,7 +362,7 @@ const HeroModern = ({
                 href="#"
                 className={cn(
                   "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
-                  isDark
+                  effectiveIsDark
                     ? "focus-visible:outline-[#00ED64]"
                     : "focus-visible:outline-[#2AA198]",
                 )}
@@ -377,7 +375,7 @@ const HeroModern = ({
                   alt={`Partner company logo`}
                   className={cn(
                     "h-6 sm:h-7 md:h-7 w-auto object-contain transition-opacity duration-200",
-                    isDark
+                    effectiveIsDark
                       ? "opacity-80 hover:opacity-100"
                       : "opacity-90 hover:opacity-100",
                     "filter grayscale brightness-200",
@@ -391,7 +389,7 @@ const HeroModern = ({
                 href="#"
                 className={cn(
                   "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
-                  isDark
+                  effectiveIsDark
                     ? "focus-visible:outline-[#00ED64]"
                     : "focus-visible:outline-[#2AA198]",
                 )}
@@ -404,7 +402,7 @@ const HeroModern = ({
                   alt={`Partner company logo`}
                   className={cn(
                     "h-6 sm:h-7 md:h-10 w-auto object-contain transition-opacity duration-200",
-                    isDark
+                    effectiveIsDark
                       ? "opacity-80 hover:opacity-100"
                       : "opacity-90 hover:opacity-100",
                     "filter grayscale brightness-200",
@@ -418,7 +416,7 @@ const HeroModern = ({
                 href="#"
                 className={cn(
                   "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
-                  isDark
+                  effectiveIsDark
                     ? "focus-visible:outline-[#00ED64]"
                     : "focus-visible:outline-[#2AA198]",
                 )}
@@ -431,7 +429,7 @@ const HeroModern = ({
                   alt={`Partner company logo`}
                   className={cn(
                     "h-6 sm:h-7 md:h-4 w-auto object-contain transition-opacity duration-200",
-                    isDark
+                    effectiveIsDark
                       ? "opacity-80 hover:opacity-100"
                       : "opacity-90 hover:opacity-100",
                     "filter grayscale brightness-200",
@@ -445,7 +443,7 @@ const HeroModern = ({
                 href="#"
                 className={cn(
                   "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
-                  isDark
+                  effectiveIsDark
                     ? "focus-visible:outline-[#00ED64]"
                     : "focus-visible:outline-[#2AA198]",
                 )}
@@ -458,7 +456,7 @@ const HeroModern = ({
                   alt={`Partner company logo`}
                   className={cn(
                     "h-6 sm:h-7 md:h-7 w-auto object-contain transition-opacity duration-200",
-                    isDark
+                    effectiveIsDark
                       ? "opacity-80 hover:opacity-100"
                       : "opacity-90 hover:opacity-100",
                     "filter grayscale brightness-200",
@@ -472,7 +470,7 @@ const HeroModern = ({
                 href="#"
                 className={cn(
                   "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
-                  isDark
+                  effectiveIsDark
                     ? "focus-visible:outline-[#00ED64]"
                     : "focus-visible:outline-[#2AA198]",
                 )}
@@ -485,7 +483,7 @@ const HeroModern = ({
                   alt={`Partner company logo`}
                   className={cn(
                     "h-6 sm:h-7 md:h-6 w-auto object-contain transition-opacity duration-200",
-                    isDark
+                    effectiveIsDark
                       ? "opacity-80 hover:opacity-100"
                       : "opacity-90 hover:opacity-100",
                     "filter grayscale brightness-200",
@@ -499,7 +497,7 @@ const HeroModern = ({
                 href="#"
                 className={cn(
                   "inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4",
-                  isDark
+                  effectiveIsDark
                     ? "focus-visible:outline-[#00ED64]"
                     : "focus-visible:outline-[#2AA198]",
                 )}
@@ -512,7 +510,7 @@ const HeroModern = ({
                   alt={`Partner company logo`}
                   className={cn(
                     "h-6 sm:h-7 md:h-8 w-auto object-contain transition-opacity duration-200",
-                    isDark
+                    effectiveIsDark
                       ? "opacity-80 hover:opacity-100"
                       : "opacity-90 hover:opacity-100",
                     "filter grayscale brightness-200",

@@ -10,10 +10,10 @@ export default function IndexPage() {
   return (
     <>
       <HeroModern
-        title="The database for dynamic, demanding software"
-        description="Start exploring the powerful capabilities of the leading modern database by creating a cluster in just three minutes."
-        primaryButtonText="Get Started"
-        secondaryButtonText="Documentation"
+        title="NEW: Announcing our new Client Onboarding - ICT Mumbai"
+        description="Discover our suite of global technology solutions, cloud infrastructure, and advanced educational tools designed to shape the future."
+        primaryButtonText="About Us"
+        secondaryButtonText="Discover Our Products"
         primaryButtonUrl="#"
         secondaryButtonUrl="#"
       />

@@ -426,9 +426,10 @@ export function CTASection() {
         <Button
           variant="secondary"
           className="group relative z-10 mt-4 flex w-fit items-center justify-center gap-2 rounded-md px-8 py-6 tracking-tight text-lg font-medium bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/80"
+          suppressHydrationWarning
         >
           Book an Appointment
-          <ArrowRight className="size-5 -rotate-45 transition-all ease-out group-hover:ml-3 group-hover:rotate-0" />
+          <ArrowRight className="size-5 -rotate-45 transition-all ease-out group-hover:ml-3 group-hover:rotate-0" aria-hidden="true" />
         </Button>
       </div>
 
